@@ -31,20 +31,20 @@ Nota: posArray : folha
 
 O índice onde se encontra a sub-árvore esquerda do nodo da posição i. */
 
-// Todas as sub-árvores esquerdas encontram-se em posições ímpares logo fica 2 x i + 1.  
+// R.: Todas as sub-árvores esquerdas encontram-se em posições ímpares logo fica 2 x i + 1.  
 
 // (b) O índice onde se encontra a sub-árvore direita do nodo da posição i.
 
-//// Todas as sub-árvores direitas encontram-se em posições pares logo fica 2 x i + 2.
+// R.: Todas as sub-árvores direitas encontram-se em posições pares logo fica 2 x i + 2.
 
 // (c) O índice onde se encontra o pai do nodo da posição i.
 
-// Os pais de todo o nodo encontram-se nas posições dadas por (i-1) / 2
+// R.: Os pais de todo o nodo encontram-se nas posições dadas por (i-1) / 2
 
 /* (d) O índice onde se encontra a primeira folha, i.e., o primeiro nodo que não tem
 sucessores. */
 
-// Temos de ir ao pai do nodo e descer até à sua folha, ou seja pai(i) + (i + 1) e pai(i) + (i + 2) 
+// R.: Temos de ir ao pai do nodo e descer até à sua folha, ou seja pai(i) + (i + 1) e pai(i) + (i + 2) 
 
 /* 2. Defina a função void bubbleUp (int i, int h[]) que (por sucessivas trocas com o
 pai) puxa o elemento que está na posição i da min-heap h até que satisfaça a propriedade das min-heaps.
@@ -61,7 +61,7 @@ void bubbleUp (int i, int h[]){
         swap(h,i,(i-1)/2), i = (i-1)/2;
 }
 
-// Pior Caso: O i é o maior valor e temos de comparar todos os pais dos nodos, tendo complexidade T(N) = Nodos.
+// Pior Caso: O i é o maior valor e temos de comparar todos os pais dos nodos, tendo complexidade T(N) = N.
 
 /* 3. Defina a função void bubbleDown (int i, int h[], int N) que (por sucessivas trocas com um dos filhos) empura o elemento
 que está na posição i da min-heap h até que satisfaça a propriedade das min-heaps. Identifique o pior caso desta função e 
