@@ -105,6 +105,7 @@ pós: `r == sum_{0 <= i < N} v[i]`
 prefixo ordenado de um array.
 
 pré: N >= 0
+
 pós: `(N == 0 && r == 0) || (forall_{1 <= i < r} v[i-1] < v[i] && v[r] > v[r-1])`  
 
 (e) A função int isSorted (int v[], int N) que testa se um array está ordenado
