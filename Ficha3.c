@@ -159,22 +159,22 @@ void printMinHeap (PriorityQueue *q){
 
 
 int main(){
-	PriorityQueue q;
+    PriorityQueue q;
     init(&q);
     printf("Inicialização:\n");
-	printMinHeap(&q);
-	add(20,&q);
-	add(23,&q);
-	add(2,&q);
-	add(12,&q);
-	add(32,&q);
+    printMinHeap(&q);
+    add(20,&q);
+    add(23,&q);
+    add(2,&q);
+    add(12,&q);
+    add(32,&q);
     printf("Depois de adição:\n");
-	printMinHeap(&q);
-	int a = 2;
-	remover(&q,&a);
+    printMinHeap(&q);
+    int a = 2;
+    remover(&q,&a);
     printf("Depois de remover:\n");
-	printMinHeap(&q);
-	return 0;
+    printMinHeap(&q);
+    return 0;
 }
 
 /* 5. A operação void heapify (int v[], int N) consiste em obter uma permutação do
