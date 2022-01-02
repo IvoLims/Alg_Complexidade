@@ -92,6 +92,7 @@ pós: `r == x*y`
 números inteiros positivos.
 
 pré: True
+
 pós: `(x % r == 0 && y % r == 0) && nexists_{r < i < inf} x % i == 0 && y % i == 0`  
 
 (c) A função `int sum (int v[], int N)` que calcula a soma dos elementos de um
