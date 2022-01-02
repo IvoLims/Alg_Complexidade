@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 /* 1. Min-heaps
 
 Uma min-heap é uma árvore binária em que cada nodo é menor ou igual a todos os seus sucessores.
@@ -69,7 +71,7 @@ void bubbleDown1 (int i, int h[], int N){
     while( (2*i+2) < N && control){
         
         if(h[2*i+1] > h[2*i+2]) p = h[2*i+1];
-        else p = h[2*i+2]
+        else p = h[2*i+2];
 
         if(h[i] > h[p]) swap(h,i,p),i=p;
         else control = 0;
@@ -126,7 +128,7 @@ int isEmpty (PriorityQueue *q){
 int add (int x, PriorityQueue *q){
     if (q->tamanho == Max) return 1;
     q->valores[q->tamanho] = x;
-    bubbleUp(q->tamanho, q->valores)
+    bubbleUp(q->tamanho, q->valores);
     q->tamanho++;
     return 0; 
 }
@@ -136,19 +138,18 @@ int add (int x, PriorityQueue *q){
 
 int remove (PriorityQueue *q, int *rem){
     if( q->tamanho == 0 ) return 1;
-    rem = q->valores[0];
+    rem = &q->valores[0];
     q->valores[0] = q->valores[q->tamanho-1];
     q->tamanho--;
-    bubbleDown2(0,q->valores,q->tamanho)
+    bubbleDown2(0,q->valores,q->tamanho);
     return 0;
 }
 
 // Para testes:
 
-PriorityQueue init(){
-    PriorityQueue q = (PriorityQueue) malloc(sizeof(struct(PriorityQueue)));
-    q->tamanho = 0;
-    return q;
+void init (PriorityQueue *q) {
+    *q->valores = calloc(5, sizeof(struct pQueue));
+    q->tamanho = 5;
 }
 
 void printMinHeap (PriorityQueue *q){
@@ -158,17 +159,21 @@ void printMinHeap (PriorityQueue *q){
 
 
 int main(){
-	PriorityQueue q = init();
-	printMinHeap(q);
-	add(20,q);
-	add(23,q);
-	add(2,q);
-	add(12,q);
-	add(32,q);
-	printMinHeap(q);
+	PriorityQueue q;
+    init(&q);
+    printf("Inicialização:\n");
+	printMinHeap(&q);
+	add(20,&q);
+	add(23,&q);
+	add(2,&q);
+	add(12,&q);
+	add(32,&q);
+    printf("Depois de adição:\n");
+	printMinHeap(&q);
 	int a = 2;
-	remover(q,&a);
-	printMinHeap(q);
+	remover(&q,&a);
+    printf("Depois de remover:\n");
+	printMinHeap(&q);
 	return 0;
 }
 
