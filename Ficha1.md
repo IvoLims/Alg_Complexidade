@@ -22,7 +22,8 @@ int fb (int x, int y){
 return r;
 }
 ``` 
-R.: Retorna o divisor comum de `x` e `y`.  
+R.: Retorna o divisor comum de `x` e `y`.
+
 (c) 
 ```c
 int fc (int x, int y){
@@ -55,6 +56,7 @@ return x;
 }
 ```
 R.: Retorna um `x` que é menor ou igual a todos os restantes elementos da lista.
+
 (f)
 ```c 
 int ff (int a[], int N){
