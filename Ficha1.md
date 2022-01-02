@@ -112,4 +112,5 @@ pós: `(N == 0 && r == 0) || (forall_{1 <= i < r} v[i-1] < v[i] && v[r] > v[r-1]
 por ordem crescente.
 
 pré: N >= 0
+
 pós: `forall_{1 <= i < N} v[i-1] < v[i]` 
