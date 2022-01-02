@@ -237,7 +237,7 @@ return hash;
 /* 2.1 Chaining
 Vamos usar o seguinte tipo. */
 
-#define Size ...
+#define Size 10
 typedef struct nodo {
 char *chave; int ocorr;
 struct nodo *prox;
@@ -247,28 +247,86 @@ struct nodo *prox;
 1. void initEmpty (THash t) que inicializa um multi-conjunto a vazio */
 
 void initEmpty (THash t){
-
+    int i;
+    for(i = 0; i < Size; i++){
+        t[i] = malloc(sizeof(struct nodo));
+        if(t[i] == NULL){ printf("Oh no something is wrong :(\n"); break;}
+        t[i] -> chave = "";
+        t[i] -> ocorr = 0;
+        t[i] -> prox = NULL;
+    }
 }
 
 /*2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um
 multi-conjunto */
 
 void add (char *s, THash t){
-
+    char p = hash(s);
+    int tamanho = Size;
+    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
+    if(t[p]->ocorr == 1) printf("Collision, ohh no :( with %s\n",t[p]->chave);
+    else t[p]->ocorr = 1, t[p]->chave = s;
 }
 
 /*3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num
 multi-conjunto */
 
 int lookup (char *s, THash t){
-
+    char p = hash(s);
+    int tamanho = Size;
+    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
+    return (s == t[p]->chave && t[p]->ocorr);
 }
 
 /*4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um
 multi-conjunto. */
 
 int remove (char *s, THash t){
+    char p = hash(s);
+    int tamanho = Size;
+    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
+    if(t[p]->chave != s){ printf("The key %s doesn't exist.\n\n",s);return 1;}
+    else{
+      t[p] -> chave = "Empty";
+      t[p] -> ocorr = 0;
+    }
+    return 0;
+}
 
+//Para testes
+
+void display(THash t){
+  for (int i = 0; i < Size; i++) printf("key: %s pos: %d ocorr: %d \n", t[i]->chave, i, t[i]->ocorr);
+  printf("\n");
+}
+
+int main(){
+	  THash t;
+    initEmpty(t);
+    printf("Inicialização:\n");
+    display(t);
+    addHash("Madara",t);
+    addHash("Nami",t);
+    addHash("Boruto",t);
+    addHash("Luffy",t);
+    addHash("Naruto",t);
+    addHash("Sanji",t);
+    addHash("Sasuke",t);
+    addHash("Zoro",t);
+    addHash("Sakura",t);
+    addHash("Usopp",t);
+    addHash("Kakashi",t); //Colisão possivel
+    printf("Depois da inserção:\n");
+	  display(t);
+    int r1 = lookup("Kakashi",t);
+    printf("Resultado do LookUp: %d\n", r1);
+    int r2 = lookup("Zoro",t);
+    printf("Resultado do LookUp: %d\n\n", r2);
+    remove("Madara",t);
+    remove("Franky",t);
+    printf("Depois de remover:\n");
+    display(t);
+	  return 0;
 }
 
 /*2.2 Open Addressing
