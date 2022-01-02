@@ -118,9 +118,9 @@ pós: `forall_{1 <= i < N} v[i-1] < v[i]`
 # 2 Correção
 ## 1. Para cada um dos seguintes triplos de Hoare, apresente um contra-exemplo que mostre a sua não validade.
 (a)
-```c
-{T rue}\n
-r = x+y;\n
-{r ≥ x}
-```
+|---|
+| {T rue} |
+| r = x+y; |
+| {r ≥ x} |
+|---|
 R.: `x = 3, y = -1`
