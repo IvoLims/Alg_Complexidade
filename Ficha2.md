@@ -52,7 +52,7 @@ Considere que o tamanho do input é o número de bits necessários para represen
 números inteiros passados como argumento. Recorde que, por exemplo, os números cuja
 representação requer 5 bits são {16, . . . , 31}.
 
-##3. Considere a seguinte definição de uma função que calcula a maior soma de um segmento de um array de inteiros.
+## 3. Considere a seguinte definição de uma função que calcula a maior soma de um segmento de um array de inteiros.
 ```c
 int maxSoma (int v[], int N) {
 int i, j, r=0, m;
@@ -95,8 +95,8 @@ return r;
 ```
 Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações *2, /2 e %2 se podem escrever como >>1, <<1 e &1
 
-#2 Definições Recursivas
-##1. Utilize uma árvore de recorrência para encontrar limites superiores para o tempo de execução dados pelas seguintes recorrências (assuma que para todas elas T(0) é uma constante):
+# 2 Definições Recursivas
+## 1. Utilize uma árvore de recorrência para encontrar limites superiores para o tempo de execução dados pelas seguintes recorrências (assuma que para todas elas T(0) é uma constante):
 
 (a) T(n) = k + T(n − 1) com k constante
 
@@ -166,7 +166,7 @@ return r;
 }
 ```
 
-#3 Análise de caso médio
+# 3 Análise de caso médio
 ## 1. Relembre a função crescente definida acima.
 ```c
 int crescente (int v[], int N) {
