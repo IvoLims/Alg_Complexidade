@@ -1,5 +1,3 @@
-
-Análise da complexidade de programas
 # 1 Contagem
 ## 1. Para cada uma das funções de ordenação abaixo 
 
