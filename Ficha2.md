@@ -14,6 +14,9 @@ for (j=0; j<i; j++)
 if (v[j] > v[j+1]) swap (v,j,j+1);
 }
 ```
+R.: **Melhor caso:** array ordenado  
+    **Pior caso:** array com ordem invertida  
+    **Nº comparações =** sum_{0 < i < N} i  
 (b) 
 ```c
 void iSort (int v[], int N){
