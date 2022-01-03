@@ -196,12 +196,10 @@ return r;
 ```
 R.:
 
-**1º Caso:**
-T(0) = k  
+**1º Caso:** T(0) = k  
 T(n) = k' + 2 * T(n/2)  
 
-**2º Caso:**  
-T(0) = k  
+**2º Caso:** T(0) = k  
 T(n) = k' + T(n-1) + T(0) 
 
 # 3 Análise de caso médio
