@@ -47,7 +47,7 @@ return r;                            |     // pos: r == x * y
 }                                    |     return r;
                                      |     }
 ```
-Para cada uma destas funções efectue uma contagem do número de vezes que as operações primitivas1(+ - *2 /2 %2) contidas no corpo do ciclo são executadas no pior caso. Considere que o tamanho do input é o número de bits necessários para representar os números inteiros passados como argumento. Recorde que, por exemplo, os números cuja representação requer 5 bits são {16, . . . , 31}.
+Para cada uma destas funções efectue uma contagem do número de vezes que as operações primitivas1(+ - \*2 /2 %2) contidas no corpo do ciclo são executadas no pior caso. Considere que o tamanho do input é o número de bits necessários para representar os números inteiros passados como argumento. Recorde que, por exemplo, os números cuja representação requer 5 bits são {16, . . . , 31}.
 
 R.: 
 **Nº comparações =** 2 * x  
@@ -71,6 +71,7 @@ return r;                                 |
 }                                         |     
 ```
 (a) Determine a complexidade da função maxSoma em termos do número de acessos ao array argumento.
+
 R.: sum_{0 < i < N} sum_{i <= j < N} j-i+1 
 
 (b) Uma forma alternativa de resolver este problema consiste em usar um array auxiliar c com N elementos, que será preenchido de acordo com a seguinte propriedade o elemento c[i] contem a maior soma de um segmento do array que termina (e inclui) v[i]. Implemente esta estratégia e compare a complexidade desta solução com a da função apresentada.
@@ -87,7 +88,7 @@ return i;                                   |     if (m>r) m = r;
                                             |     return r;
                                             |     }
 ```
-Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações x2, /2 e %2 se podem escrever como >>1, <<1 e &1.
+Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações \*2, /2 e %2 se podem escrever como >>1, <<1 e &1.
 
 R.:
 **Melhor caso:** array por ordem decrescente  
