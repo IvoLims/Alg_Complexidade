@@ -6,6 +6,7 @@ Análise da complexidade de programas
 • Identifique o melhor e pior casos em termos do número de comparações entre elementos do array e em termos do número de trocas efectuadas.
 
 • Calcule o número de comparações entre elementos do array efectuadas nesses casos identificados.
+
 (a) 
 ```c
 void bubbleSort (int v[], int N){
