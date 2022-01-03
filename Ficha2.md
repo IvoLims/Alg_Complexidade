@@ -240,7 +240,7 @@ Stack b;
 
 (b) Mostre que o custo amortizado de cada uma das operações de enqueue ou dequeue numa sequência de N operações é O(1) usando o método do potencial.
 
-2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
+## 2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
 ```c
 void multiPop(S,k) {
 while (!IsEmpty(S) && k != 0) {
