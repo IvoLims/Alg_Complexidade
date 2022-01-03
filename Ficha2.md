@@ -14,9 +14,11 @@ for (j=0; j<i; j++)
 if (v[j] > v[j+1]) swap (v,j,j+1);
 }
 ```
-R.: **Melhor caso:** array ordenado  
-    **Pior caso:** array com ordem invertida  
-    **Nº comparações =** sum_{0 < i < N} i  
+R.:
+**Melhor caso:** array ordenado  
+**Pior caso:** array com ordem invertida  
+**Nº comparações =** sum_{0 < i < N} i 
+    
 (b) 
 ```c
 void iSort (int v[], int N){
@@ -26,91 +28,91 @@ for (j=i; j>0 && v[j-1] > v[j]; j--)
 swap (v,j,j-1);
 }
 ```
+R.: 
+**Melhor caso:** array ordenado  
+**Pior caso:** array com ordem invertida  
+**Nº comparações melhor caso =** sum_{0 < i < N} 1  
+**Nº comparações pior caso =** sum_{0 < i < N} i 
+    
 ## 2. Considere as seguintes definições de funções (já estudadas na Ficha 1) que calculam o produto de dois números inteiros não negativos.
 ```c
-int mult1 (int x, int y){
-// pre: x>=0
-int a=x, b=y, r=0;
-while (a>0){
-r = r+b; a = a-1;
-}
-// pos: r == x * y
-return r;
-}
-int mult2 (int x, int y){
-// pre: x>=0
-int a=x, b=y, r=0;
-while (a>0) {
-if (a%2 == 1) r = r+b;
-a=a/2; b=b*2;
-}
-// pos: r == x * y
-return r;
-}
+int mult1 (int x, int y){            |     int mult2 (int x, int y){
+// pre: x>=0                         |     // pre: x>=0
+int a=x, b=y, r=0;                   |     int a=x, b=y, r=0;
+while (a>0){                         |     while (a>0) {
+r = r+b; a = a-1;                    |     if (a%2 == 1) r = r+b;
+}                                    |     a=a/2; b=b*2;
+// pos: r == x * y                   |     }
+return r;                            |     // pos: r == x * y
+}                                    |     return r;
+                                     |     }
 ```
-Para cada uma destas funções efectue uma contagem do número de vezes que as operações
-primitivas1(+ - *2 /2 %2) contidas no corpo do ciclo são executadas no pior caso.
-Considere que o tamanho do input é o número de bits necessários para representar os
-números inteiros passados como argumento. Recorde que, por exemplo, os números cuja
-representação requer 5 bits são {16, . . . , 31}.
+Para cada uma destas funções efectue uma contagem do número de vezes que as operações primitivas1(+ - *2 /2 %2) contidas no corpo do ciclo são executadas no pior caso. Considere que o tamanho do input é o número de bits necessários para representar os números inteiros passados como argumento. Recorde que, por exemplo, os números cuja representação requer 5 bits são {16, . . . , 31}.
+
+R.: 
+**Nº comparações =** 2 * x  
+**Melhor caso** é ter 2^(n-1)  
+**Pior caso** é ter 2^n-1
+
+**Nº comparações =** 3 * (log_2(x) + 1) + nº de ocorrências de ímpares  
+**Melhor caso** é ter `100...0`  
+**Pior caso** é ter `111...1`  
 
 ## 3. Considere a seguinte definição de uma função que calcula a maior soma de um segmento de um array de inteiros.
 ```c
-int maxSoma (int v[], int N) {
-int i, j, r=0, m;
-for (i=0; i<N; i++)
-for (j=i; j<N; j++) {
-m = soma(v,i,j);
-if (m>r) r = m;
-}
-return r;
-}
-int soma (int v[], int a, int b) {
-int r = 0, i;
-for (i=a; i<=b; i++)
-r=r+v[i];
-return r;
-}
+int maxSoma (int v[], int N) {            |     int soma (int v[], int a, int b) {
+int i, j, r=0, m;                         |     int r = 0, i;
+for (i=0; i<N; i++)                       |     for (i=a; i<=b; i++)
+for (j=i; j<N; j++) {                     |     r=r+v[i];
+m = soma(v,i,j);                          |     return r;
+if (m>r) r = m;                           |     }
+}                                         |     
+return r;                                 |     
+}                                         |     
 ```
 (a) Determine a complexidade da função maxSoma em termos do número de acessos ao array argumento.
+R.: sum_{0 < i < N} sum_{i <= j < N} j-i+1 
 
 (b) Uma forma alternativa de resolver este problema consiste em usar um array auxiliar c com N elementos, que será preenchido de acordo com a seguinte propriedade o elemento c[i] contem a maior soma de um segmento do array que termina (e inclui) v[i]. Implemente esta estratégia e compare a complexidade desta solução com a da função apresentada.
 
 ## 4. Considere a seguinte função que calcula o comprimento do maior segmento crescente de uma array de inteiros.
 ```c
-int crescente (int v[], int N) {
-int i;
-for (i=1; i<N; i++)
-if (v[i] < v[i-1]) break;
-return i;
-}
-
-int maxcresc (int v[], int N) {
-int r = 1, i = 0, m;
-while (i<N-1) {
-m = crescente (v+i, N-i);
-if (m>r) m = r;
-i++;
-}
-return r;
-}
+int crescente (int v[], int N) {            |     int maxcresc (int v[], int N) {
+int i;                                      |     int r = 1, i = 0, m;
+for (i=1; i<N; i++)                         |     while (i<N-1) {
+if (v[i] < v[i-1]) break;                   |     m = crescente (v+i, N-i);
+return i;                                   |     if (m>r) m = r;
+}                                           |     i++;
+                                            |     }
+                                            |     return r;
+                                            |     }
 ```
-Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações *2, /2 e %2 se podem escrever como >>1, <<1 e &1
+Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações x2, /2 e %2 se podem escrever como >>1, <<1 e &1
+R.:
+**Melhor caso:** array por ordem decrescente  
+**Pior caso:** array por ordem crescente  
+**Nº =** comprimento dos segmentos crescentes
 
 # 2 Definições Recursivas
 ## 1. Utilize uma árvore de recorrência para encontrar limites superiores para o tempo de execução dados pelas seguintes recorrências (assuma que para todas elas T(0) é uma constante):
 
 (a) T(n) = k + T(n − 1) com k constante
+R.: sum_{0 <= i < n} k + k'
 
 (b) T(n) = k + T(n/2) com k constante
+R.: sum_{0 <= i < log_2(n)} 2^i * k + k'
 
 (c) T(n) = k + 2 ∗ T(n/2) com k constante
+R.: (sum_{0 <= i < log_2(n)} 2^i) * k + 2^(log_2(n)) * k'  
 
 (d) T(n) = n + T(n − 1)
+R.: sum_{0 <= i < n} n + k' = n^2/2 + n/2 + k'; O(n)  
 
 (e) T(n) = n + T(n/2)
+R.: (sum_{0 <= i < log_2(n)} n/2^i) + k' = 2n - 1; O(n)  
 
 (f) T(n) = n + 2 ∗ T(n/2)
+R.: (sum_{0 <= i < log_2(n)} n/2^i) + 2^(log_2(n)+1) * k'; O(n * log_2(n))  
 
 ## 2. Exprima a complexidade da função maxSomaR (em termos do número de acessos ao array argumento) como uma recorrência.
 ```c
@@ -128,6 +130,11 @@ if (m1>m2) r = m1; else r = m2;
 return r;
 }
 ```
+R.: 
+T(0) = 0  
+T(n) = n + T(n-1)  
+n^2/2 + n/2
+
 ## 3. Considere o seguinte algoritmo para o problema das Torres de Hanoi:
 ```c
 void Hanoi(int nDiscos, int esquerda, int direita, int meio)
@@ -140,6 +147,10 @@ Hanoi(nDiscos-1, meio, direita, esquerda);
 }
 ```
 Escreva uma relação de recorrência que exprima a complexidade deste algoritmo (por exemplo, em função do número de linhasimpressas). Desenhe a árvore de recursão do algoritmo e obtenha a partir dessa árvore um resultado sobre a sua complexidade assimptótica.
+R.:
+T(0) = 0  
+T(n) = k + 2 * T(n-1)  
+sum_{0 <= i < n} 2^i = 2^n -1 
 
 ## 4. Considere a seguinte definição da função que ordena um vector usando o algoritmo de merge sort.
 ```c
@@ -152,6 +163,12 @@ mergeH (v, N);
 }
 ```
 Considere que a função int mergeH (int a[], int N) executa em tempo Tmerge(N) = 2∗N. Apresente uma relação de recorrência que traduza o tempo de execução de msort em função do tamanho do vector argumento. Apresente ainda uma solução dessa recorrência.
+R.:
+T(1) = k  
+T(n) = k' + 2 * n + 2 * T(n/2)  
+T(n) = 2n + 2(2(n/2) + 2T(n/4)) = 2n + 2(n + 2T(n/4)) = 2n + 2n + 4T(n/4)  
+Vamos ter log_2(n) parcelas, cada uma delas com o valor 2n logo será log_2(n) * 2n  
+O(n * log_2(n))  
 
 ## 5. Considere a definição da função altura sobre árvores binárias Descreva a sua complexidade com uma recorrência, considerando duas configurações extremas de árvores:
 
@@ -167,6 +184,14 @@ altura (a->dir));
 return r;
 }
 ```
+R.:
+**(1)** 
+T(0) = k  
+T(n) = k' + 2 * T(n/2)  
+
+**(2)**  
+T(0) = k  
+T(n) = k' + T(n-1) + T(0) 
 
 # 3 Análise de caso médio
 ## 1. Relembre a função crescente definida acima.
