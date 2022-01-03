@@ -176,3 +176,218 @@ sua correção (parcial).
 
 R.: `a * b + r == x * y && a >= 0`   
 
+## 2. Para cada uma das funções seguintes, indique um invariante de ciclo que lhe permita provar a correcção parcial. Em cada um dos casos, mesmo informalmente, apresente argumentos que lhe permitam demonstrar as propriedades (inicialização, preservação e utilidade) dos invariantes definidos.
+
+(a) Índice do menor elemento de um array.
+```c
+int minInd (int v[], int N) {
+// pre: N>0
+int i = 1, r = 0;
+// inv: ???
+while (i<N) {
+if (v[i] < v[r]) r = i;
+i = i+1;
+}
+// pos: 0 <= r < N && forall_{0 <= k < N} v[r] <= v[k]
+return r;
+}
+```
+R.: `0 <= r < i && (forall_{0 <= k < i} v[r] <= v[i])`  
+
+(b) Menor elemento de um array.
+```c
+int minimo (int v[], int N) {
+// pre: N>0
+int i = 1, r = v[0];
+// inv: ???
+while (i<N) {
+if (v[i] < r) r = v[i];
+i=i+1;
+}
+// pos: (forall_{0 <= k < N} r <= v[k]) &&
+// (exists_{0 <= p < N} r == v[p])
+return r;
+}
+```
+R.: `(exists_{0 <= r < i} r == v[p]) && (forall_{0 <= k < i} v[r] <= v[i])`  
+
+(c) Soma dos elementos de um array.
+```c
+int soma (int v[], int N) {
+// pre: N>0
+int i = 0, r = 0;
+// inv: ???
+while (i<N) {
+r = r + v[i]; i=i+1;
+}
+// pos: r == sum_{0 <= k < N} v[k]
+return r;
+}
+```
+R.: `r == sum_{0 <= k < i} v[k]`  
+
+(d) Quadrado de um número inteiro positivo.
+```c
+int quadrado1 (int x) {
+// pre: x>=0
+int a = x, b = x, r = 0;
+// inv: ??
+while (a!=0) {
+if (a%2 != 0) r = r + b;
+a=a/2; b=b*2;
+}
+// pos: r == x^2
+return r;
+}
+```
+R.: `a * b + r = x^2`  
+
+(e)  Quadrado de um número inteiro positivo.
+```c
+int quadrado2 (int x){
+// pre: x>=0
+int r = 0, i = 0, p = 1;
+// inv: ??
+while (i<x) {
+i = i+1; r = r+p; p = p+2;
+}
+// pos: r == x^2
+return r;
+}
+```
+R.: `r == i^2`  
+
+(f) Tamanho do maior prefixo ordenado de um array.
+```c
+int maxPOrd (int v[], int N){
+// pre: ??
+int r = 1;
+// inv: ??
+while (r < N && v[r-1] <= v[r])
+r = r+1;
+// pos: ??
+return r;
+}
+```
+R.: `forall_{1 <= i < r} v[i-1] < v[i]`  
+
+(g) Procura de um elemento num array.
+```c
+int procura (int x, int a[], int N){
+// pre: N>0
+int p = -1, i = 0;
+// inv: ??
+5
+while (p == -1 && i < N) {
+if (a[i] == x) p = i;
+i = i+1;
+}
+// pos: (p == -1 && forall_{0 <= k < N} a[k] != x) ||
+// ( (0 <= p < N ) && x == a[p])
+return p;
+}
+```
+R.: `(p == -1 && forall_{0 <= k < i} a[k] != x) || ((0 <= p < i) && x == a[p])`  
+e talvez este `(p == -1 && forall_{0 <= k < i} a[k] != x) || (p == i-1 && x == a[p])`  
+
+(h) Soma dos primeiros números inteiros.
+```c
+int triangulo1 (int n){
+// pre: n>=0
+int r=0, i=1;
+// inv: ??
+while (i<=n) {
+r = r+i; i = i+1;
+}
+// pos: r == n * (n+1) / 2;
+return r;
+}
+```
+R.: `r == (i-1) * i / 2`  
+
+(i) Soma dos primeiros números inteiros.
+```c
+int triangulo2 (int n){
+// pre: n>=0
+int r=0, i=n;
+// inv: ??
+while (i>0) {
+r = r+i; i = i-1;
+}
+// pos: r == n * (n+1) / 2;
+return r;
+}
+```
+R.: `n * (n+1) / 2 == (i * (i+1) / 2) + r`  
+
+(j) Resto da divisão inteira.
+```c
+int mod (int x, int y) {
+// pre: x>=0 && y>0
+int r = x;
+while (y <= r) {
+r = r-y;
+}
+// pos: 0 <= r < y && exists_{q} x == q*y + r
+return r;
+}
+``` 
+R.: `exists_{q} x == q*y + r`  
+
+(k) Valor de um polinómio num ponto.
+```c
+float valor1 (float x, float coef[], int N){
+// pre: N >= 0
+float r=0; int i=0;
+// inv: ??
+while (i<N){
+r = r + pow(x,i) * coef[i];
+i = i+1;
+}
+// pos: r = sum_{0<=k<N} x^k * coef[k]
+return r;
+}
+```
+R.: `r == sum_{0 <= k < i} x^k * coef[k]`  
+
+(l) Valor de um polinómio num ponto.
+```c
+float valor2 (float x, float coef[], int N){
+// pre: N >= 0
+float r=0; int i=N;
+// inv: ??
+while (i>0){
+i = i-1;
+r = (r * x) + coef[i];
+}
+// pos: r = sum_{0<=k<N} x^k * coef[k]
+return r;
+}
+``` 
+R.: `r == sum_{i <= k < N} x^k * coef[k]`  
+
+## 3. Para cada uma das funções da alínea anterior, indique um variante de ciclo que lhe permita provar a correção total
+
+a) `N-i`  
+
+b) `N-i`  
+
+c) `N-i`  
+
+d) `a`
+
+e) `x-i`  
+
+f) `N-r`  
+
+g) `N-i`  
+
+h) `n-i+1`  
+
+i) `i`  
+
+j) `r - (x % y)` ???  
+
+k) `N-i`  
+
+l) `i` 
