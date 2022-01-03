@@ -117,10 +117,62 @@ pós: `forall_{1 <= i < N} v[i-1] < v[i]`
 
 # 2 Correção
 ## 1. Para cada um dos seguintes triplos de Hoare, apresente um contra-exemplo que mostre a sua não validade.
-(a)
-
-{T rue}
-r = x+y;
-{r ≥ x}
-
+(a) `{T rue} r = x+y; {r ≥ x}`
 R.: `x = 3, y = -1`
+
+(b) `{True} x = x+y; y = x-y; x = x-y; {x == y}
+R.: `x = 3, y = 2` 
+
+(c)
+`{True} x = x+y; y = x-y; x = x-y; {x 6= y}
+R.: `x = 3, y = 3`
+
+(d)
+`{True} if (x>y) r = x-y; else r = y-x; {r > 0}
+R.: `x = 3, y = 3`
+
+(e)
+`{True} while (x>0) { y=y+1; x = x-1;} {y > x}
+R.: `x = 0, y = -1` 
+
+## 2. Modifique a pré-condição de cada um dos triplos de Hoare da alínea anterior de forma a obter um triplo válido.
+
+a) `x > 0 && y > 0`  
+b) `x == y`  
+c) `x != y`  
+d) `x != y`  
+e) `(x <= 0 && y > x) || (x > 0 && y > -x)` ou `y > -|x|`
+
+# 3 Invariantes
+## 1.Considere as seguintes implementações de uma função que calcula o produto de dois números.
+```c
+int mult1 (int x, int y){      |     int mult2 (int x, int y){
+// pre: x>=0                   |     // pre: x>=0
+int a, b, r;                   |     int a, b, r;
+a=x; b=y; r=0;                 |     a=x; b=y; r=0;
+while (a>0){                   |     while (a>0) {
+r = r+b;                       |     if (a%2 == 1) r = r+b;
+a = a-1;                       |     a=a/2; b=b*2;
+}                              |     }
+// pos: r == x * y             |     // pos: r == x * y
+return r;                      |     return r;
+}                              |     }
+```
+(a) Para cada um dos predicados, indique se são verdadeiros no início (Init) e preservados pelos ciclos destas duas funções
+
+| Predicado | Init | Pres | Init | Pres |
+|---|---|---|---|---|
+| r == a * b | &#x274C; | &#x274C; | &#x274C; | &#x274C; |
+| a >= 0 | &#10004; | &#10004; | &#10004; | &#10004; |
+| b >= 0 | &#x274C; | &#x274C; | &#x274C; | &#x274C; |
+| r >= 0 | &#10004; | &#x274C; | &#10004; | &#x274C; |
+| a == x | &#10004; | &#x274C; | &#10004; | &#x274C; |
+| b == y | &#10004; | &#10004; | &#10004; | &#x274C; |
+| a * b == x * y | &#10004; | &#x274C; | &#10004; | &#x274C; |
+| a * b + r == x * y | &#10004; | &#10004; | &#10004; | &#10004; |
+
+(b) Apresente invariantes dos ciclos destas duas funções que lhe permitam provar a
+sua correção (parcial).
+
+R.: `a * b + r == x * y && a >= 0`   
+
