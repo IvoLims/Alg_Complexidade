@@ -45,49 +45,61 @@ R.: Temos de ir ao pai do nodo e descer até à sua folha, ou seja pai(i) + (i +
 
 ## 2. Defina a função void bubbleUp (int i, int h[]) que (por sucessivas trocas com o pai) puxa o elemento que está na posição i da min-heap h até que satisfaça a propriedade das min-heaps. Identifique o pior caso desta função e calcule o número de comparações/trocas efectuadas nesse caso.
 ```c
-void swap(int* ar, int i, int j){
+void swap(int *ar, int i, int j)
+{
     int temp = ar[i];
     ar[i] = ar[j];
     ar[j] = temp;
 }
 
-void bubbleUp (int i, int h[]){
-    while(i > 0 && h[i] > h[(i-1)/2])
-        swap(h,i,(i-1)/2), i = (i-1)/2;
+void bubbleUp(int i, int h[])
+{
+    while (i > 0 && h[i] > h[(i - 1) / 2])
+        swap(h, i, (i - 1) / 2), i = (i - 1) / 2;
 }
 ```
 Pior Caso: O i é o maior valor e temos de comparar todos os pais dos nodos, tendo complexidade T(N) = N.
 
 ## 3. Defina a função void bubbleDown (int i, int h[], int N) que (por sucessivas trocas com um dos filhos) empura o elemento que está na posição i da min-heap h até que satisfaça a propriedade das min-heaps. Identifique o pior caso desta função e calcule o número de comparações/trocas efectuadas nesse caso.
 ```c
-void bubbleDown1 (int i, int h[], int N){
-    int p,control = 1;
-    while( (2*i+2) < N && control){
-        
-        if(h[2*i+1] > h[2*i+2]) p = h[2*i+1];
-        else p = h[2*i+2];
+void bubbleDown1(int i, int h[], int N)
+{
+    int p, control = 1;
+    while ((2 * i + 2) < N && control)
+    {
 
-        if(h[i] > h[p]) swap(h,i,p),i=p;
-        else control = 0;
+        if (h[2 * i + 1] > h[2 * i + 2])
+            p = h[2 * i + 1];
+        else
+            p = h[2 * i + 2];
+
+        if (h[i] > h[p])
+            swap(h, i, p), i = p;
+        else
+            control = 0;
     }
-    if( (2*i+1) < N && h[2*i+1] < h[i] ) swap(h,i,2*i+1);
+    if ((2 * i + 1) < N && h[2 * i + 1] < h[i])
+        swap(h, i, 2 * i + 1);
 }
 
-// Or
+//Or
 
-#define LEFT(i) 2*i + 1
-#define RIGHT(i) 2*i + 2
+#define LEFT(i) 2 * i + 1
+#define RIGHT(i) 2 * i + 2
 
-void bubbleDown2 (int i, int h[], int N) {
-  int p;
-  while(LEFT(i) < N) {
-    p = (RIGHT(i) < N && h[RIGHT(i)] < h[LEFT(i)]) ? RIGHT(i) : LEFT(i);
-    
-    if (h[p] > h[i]) break;
-    
-    swap(h, i, p);
-    i = p;
-  }
+void bubbleDown2(int i, int h[], int N)
+{
+    int p;
+    while (LEFT(i) < N)
+    {
+        p = (RIGHT(i) < N && h[RIGHT(i)] < h[LEFT(i)]) ? RIGHT(i) : LEFT(i);
+
+        if (h[p] > h[i])
+            break;
+
+        swap(h, i, p);
+        i = p;
+    }
 }
 ```
 Pior Caso: O i implica que todos os filhos da heap sejam reorganizados, tendo complexidade T(N) = N + 1 = N.
@@ -96,9 +108,10 @@ Pior Caso: O i implica que todos os filhos da heap sejam reorganizados, tendo co
 ```c
 #define Max 100
 
-typedef struct pQueue {
-int valores [Max];
-int tamanho;
+typedef struct pQueue
+{
+    int valores[Max];
+    int tamanho;
 } PriorityQueue;
 ```
 
@@ -113,62 +126,71 @@ void empty (PriorityQueue *q){
 
 int isEmpty (PriorityQueue *q) que testa se está vazia.
 ```c
-int isEmpty (PriorityQueue *q){
-    if( q->tamanho == 0 ) return 1;
+int isEmpty(PriorityQueue *q)
+{
+    if (q->tamanho == 0)
+        return 1;
     return 0;
 }
 ```
 
 int add (int x, PriorityQueue *q) que adiciona um elemento à fila (retornando 0 se a operação for possível).
 ```c
-int add (int x, PriorityQueue *q){
-    if (q->tamanho == Max) return 1;
+int add(int x, PriorityQueue *q)
+{
+    if (q->tamanho == Max)
+        return 1;
     q->valores[q->tamanho] = x;
     bubbleUp(q->tamanho, q->valores);
     q->tamanho++;
-    return 0; 
+    return 0;
 }
 ```
 
 int remove (PriorityQueue *q, int *rem) que remove o próximo elemento
 (devolvendo-o em *rem) e retornando 0 se a operação for possível.
 ```c
-int remove (PriorityQueue *q, int *rem){
-    if( q->tamanho == 0 ) return 1;
+int remove(PriorityQueue *q, int *rem)
+{
+    if (q->tamanho == 0)
+        return 1;
     rem = &q->valores[0];
-    q->valores[0] = q->valores[q->tamanho-1];
+    q->valores[0] = q->valores[q->tamanho - 1];
     q->tamanho--;
-    bubbleDown2(0,q->valores,q->tamanho);
+    bubbleDown2(0, q->valores, q->tamanho);
     return 0;
 }
-```
 
-Para testes:
-```c
-void init (PriorityQueue *q) {
+// Para testes:
+
+void init(PriorityQueue *q)
+{
     *q->valores = calloc(5, sizeof(struct pQueue));
     q->tamanho = 5;
 }
 
-void printMinHeap (PriorityQueue *q){
-    for(int i = 0; i < q->tamanho; i++) print("Val[%d] = %d\n",i, q->valores[i]);
+void printMinHeap(PriorityQueue *q)
+{
+    for (int i = 0; i < q->tamanho; i++)
+        print("Val[%d] = %d\n", i, q->valores[i]);
     print("\n");
 }
 
-int main(){
+int main()
+{
     PriorityQueue q;
     init(&q);
     printf("Inicialização:\n");
     printMinHeap(&q);
-    add(20,&q);
-    add(23,&q);
-    add(2,&q);
-    add(12,&q);
-    add(32,&q);
+    add(20, &q);
+    add(23, &q);
+    add(2, &q);
+    add(12, &q);
+    add(32, &q);
     printf("Depois de adição:\n");
     printMinHeap(&q);
     int a = 2;
-    remover(&q,&a);
+    remover(&q, &a);
     printf("Depois de remover:\n");
     printMinHeap(&q);
     return 0;
@@ -219,12 +241,13 @@ ser guardado o número de vezes que ela ocorre no multiconjunto. As operações 
 Vamos por isso assumir a existência de uma funçãoo unsigned hash (char *chave), como
 por exemplo a seguinte (http:www.cse.yorku.ca/~oz/hash.html)
 ```c
-unsigned hash(char *str){
-unsigned hash = 5381;
-int c;
-while (c = *str++)
-hash = ((hash << 5) + hash) + c; hash * 33 + c
-return hash;
+unsigned hash(char *str)
+{
+    unsigned hash = 5381;
+    int c;
+    while (c = *str++)
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    return hash;
 }
 ```
 
@@ -233,10 +256,12 @@ Vamos usar o seguinte tipo.
 ```c
 #define Size 10
 
-typedef struct nodo {
-char *chave; int ocorr;
-struct nodo *prox;
-} Nodo, *THash [Size];
+typedef struct nodo
+{
+    char *chave;
+    int ocorr;
+    struct nodo *prox;
+} Nodo, *THash[Size];
 ```
 
 Defina as funções
