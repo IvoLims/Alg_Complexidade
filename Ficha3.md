@@ -301,7 +301,7 @@ void display(THash t){
 }
 
 int main(){
-	  THash t;
+    THash t;
     initEmpty(t);
     printf("Inicialização:\n");
     display(t);
@@ -317,7 +317,7 @@ int main(){
     addHash("Usopp",t);
     addHash("Kakashi",t); //Colisão possivel
     printf("Depois da inserção:\n");
-	  display(t);
+    display(t);
     int r1 = lookup("Kakashi",t);
     printf("Resultado do LookUp: %d\n", r1);
     int r2 = lookup("Zoro",t);
