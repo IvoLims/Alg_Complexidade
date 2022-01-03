@@ -87,7 +87,8 @@ return i;                                   |     if (m>r) m = r;
                                             |     return r;
                                             |     }
 ```
-Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações x2, /2 e %2 se podem escrever como >>1, <<1 e &1
+Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações x2, /2 e %2 se podem escrever como >>1, <<1 e &1.
+
 R.:
 **Melhor caso:** array por ordem decrescente  
 **Pior caso:** array por ordem crescente  
@@ -97,21 +98,27 @@ R.:
 ## 1. Utilize uma árvore de recorrência para encontrar limites superiores para o tempo de execução dados pelas seguintes recorrências (assuma que para todas elas T(0) é uma constante):
 
 (a) T(n) = k + T(n − 1) com k constante
+
 R.: sum_{0 <= i < n} k + k'
 
 (b) T(n) = k + T(n/2) com k constante
+
 R.: sum_{0 <= i < log_2(n)} 2^i * k + k'
 
 (c) T(n) = k + 2 ∗ T(n/2) com k constante
+
 R.: (sum_{0 <= i < log_2(n)} 2^i) * k + 2^(log_2(n)) * k'  
 
 (d) T(n) = n + T(n − 1)
+
 R.: sum_{0 <= i < n} n + k' = n^2/2 + n/2 + k'; O(n)  
 
 (e) T(n) = n + T(n/2)
+
 R.: (sum_{0 <= i < log_2(n)} n/2^i) + k' = 2n - 1; O(n)  
 
 (f) T(n) = n + 2 ∗ T(n/2)
+
 R.: (sum_{0 <= i < log_2(n)} n/2^i) + 2^(log_2(n)+1) * k'; O(n * log_2(n))  
 
 ## 2. Exprima a complexidade da função maxSomaR (em termos do número de acessos ao array argumento) como uma recorrência.
@@ -147,6 +154,7 @@ Hanoi(nDiscos-1, meio, direita, esquerda);
 }
 ```
 Escreva uma relação de recorrência que exprima a complexidade deste algoritmo (por exemplo, em função do número de linhasimpressas). Desenhe a árvore de recursão do algoritmo e obtenha a partir dessa árvore um resultado sobre a sua complexidade assimptótica.
+
 R.:
 T(0) = 0  
 T(n) = k + 2 * T(n-1)  
@@ -163,6 +171,7 @@ mergeH (v, N);
 }
 ```
 Considere que a função int mergeH (int a[], int N) executa em tempo Tmerge(N) = 2∗N. Apresente uma relação de recorrência que traduza o tempo de execução de msort em função do tamanho do vector argumento. Apresente ainda uma solução dessa recorrência.
+
 R.:
 T(1) = k  
 T(n) = k' + 2 * n + 2 * T(n/2)  
