@@ -296,12 +296,23 @@ void initEmpty (THash t){
 
 ## 2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
 ```c
-void add (char *s, THash t){
-    char p = hash(s);
-    int tamanho = Size;
-    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
-    if(t[p]->ocorr == 1) printf("Collision, ohh no :( with %s\n",t[p]->chave);
-    else t[p]->ocorr = 1, t[p]->chave = s;
+void addHash (char *s, THash t){
+     unsigned p = hash(s);
+     Nodo* ant = NULL;
+     Nodo* ptr = NULL;
+     for(ptr = t[p]; ptr != NULL; ptr = t[p]->prox){
+       if(strcmp(ptr->chave,s)){
+          ptr->ocorr++;
+          return;
+       }
+       ant = ptr;
+     }
+     //Não encontrar um igual
+     ptr = calloc(*ptr->chave,*s);
+     ptr->ocorr = 1;
+     ptr ->prox = NULL;
+     if(ant != NULL) ant->prox = ptr;
+     else t[p] = ptr;
 }
 ```
 
