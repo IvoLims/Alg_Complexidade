@@ -269,7 +269,7 @@ unsigned hash(char *str)
 # 2.1 Chaining
 Vamos usar o seguinte tipo.
 ```c
-#define Size 10
+#define Size 11
 
 typedef struct nodo
 {
