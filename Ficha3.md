@@ -329,14 +329,23 @@ int lookup (char *s, THash t){
 
 ## 4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
 ```c
-int remove (char *s, THash t){
-    char p = hash(s);
-    int tamanho = Size;
-    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
-    if(t[p]->chave != s){ printf("The key %s doesn't exist.\n\n",s);return 1;}
-    else{
-      t[p] -> chave = "Empty";
-      t[p] -> ocorr = 0;
+int removeHash (char *s, THash t){
+    unsigned p = hash(s);
+    Nodo* ptr;
+    Nodo* ant;
+    for(ptr = t[p]; strcmp(ptr->chave,s); ptr = t[p]->prox){
+      if(ptr == NULL){
+        return -1;
+      }
+      ant = ptr;
+    }
+    if(ptr->ocorr == 0){
+      if(ant != NULL){
+        ant->prox = ptr->prox;
+      }else{
+        t[p] = ptr->prox;
+      }
+      free(ptr);
     }
     return 0;
 }
@@ -382,7 +391,7 @@ int main(){
 Vamos usar o seguinte tipo.
 
 ```c
-#define Size ...
+#define Size 11
 #define Free 0
 #define Used 1
 #define Del 2
