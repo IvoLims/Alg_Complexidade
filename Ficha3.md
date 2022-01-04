@@ -246,8 +246,11 @@ Nos exercícios seguintes pretende-se usar uma tabela de Hash para implementar m
 ser guardado o número de vezes que ela ocorre no multiconjunto. As operações em causa são por isso:
 
 • inicialização de um multi-conjunto a vazio
+
 • adição de um elemento a um multi-conjunto
+
 • teste de pertença (saber qual a multplicidade de um elemento num multi-conjunto)
+
 • remoção de uma ocorrência de um elemento de um multi-conjunto
 
 Vamos por isso assumir a existência de uma funçãoo unsigned hash (char *chave), como
