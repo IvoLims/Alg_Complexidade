@@ -397,15 +397,18 @@ Vamos usar o seguinte tipo.
 #define Del 2
 
 typedef struct bucket {
-int status;  Free | Used | Del
-char *chave; int ocorr;
+    int status;  // Free | Used | Del
+    char *chave; int ocorr;
 } THash [Size];
 ```
 
 ## 1. Comece por definir a função int where (char *s, THash t) que calcula o índice de t onde s está (ou devia estar) armazenada.
 ```c
 int where (char *s, THash t){
-
+    int c, hash = 5381;
+    while (c == *s++)
+        hash *= 33 + c;
+    return hash % Size;
 }
 ```
 ## 2. Defina as funções usuais sobre multi-conjuntos:
@@ -413,14 +416,31 @@ int where (char *s, THash t){
 (a) void initEmpty (THash t) que inicializa um multi-conjunto a vazio
 ```c
 void initEmpty (THash t){
-
+  for(int i = 0; i < Size ; i++){
+    t[i].status = Free;
+    t[i].chave = NULL;
+    t[i].ocorr = 0;
+  }
 }
 ```
 (b) void add (char *s, THash t) que regista mais uma ocorrência de um elemento
 a um multi-conjunto
 ```c
 void add (char *s, THash t){
-
+  int p, i, pos = where(s,t);
+  for(i = 0; t[pos].status > Free && i < Size; i++, pos = i % Size){
+    if(strcmp(t[i].chave,s)){
+      t[i].ocorr++; 
+      return;
+    }
+  }
+  if(t[pos].status == Free){
+    t[pos].status = Used;
+    strcpy(t[i].chave, s);
+    t[pos].ocorr = 1;
+  }else{
+    printf("Something went wrong the table is full\n");
+  }
 }
 ```
 (c) int lookup (char *s, THash t) que calcula a multiplicidade de um elemento
