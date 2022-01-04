@@ -294,8 +294,7 @@ void initEmpty (THash t){
 }
 ```
 
-## 2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um
-multi-conjunto
+## 2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
 ```c
 void add (char *s, THash t){
     char p = hash(s);
@@ -306,8 +305,7 @@ void add (char *s, THash t){
 }
 ```
 
-## 3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num
-multi-conjunto
+## 3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
 ```c
 int lookup (char *s, THash t){
     char p = hash(s);
@@ -317,8 +315,7 @@ int lookup (char *s, THash t){
 }
 ```
 
-## 4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um
-multi-conjunto.
+## 4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
 ```c
 int remove (char *s, THash t){
     char p = hash(s);
