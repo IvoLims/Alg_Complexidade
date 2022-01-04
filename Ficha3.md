@@ -220,7 +220,7 @@ void heapifyDown(int v[], int N){
       bubbleDown1(i, v, N);
 }
 ```
-6. Defina uma função void ordenaHeap (int h[], int N) que, usando a função bubbleDown definida acima, transforma a min-heap h, 
+## 6. Defina uma função void ordenaHeap (int h[], int N) que, usando a função bubbleDown definida acima, transforma a min-heap h, 
 num array ordenado por ordem decrescente.
 ```c
 void ordenaHeap (int h[], int N){
@@ -277,7 +277,7 @@ typedef struct nodo
 ```
 
 Defina as funções
-1. void initEmpty (THash t) que inicializa um multi-conjunto a vazio
+## 1. void initEmpty (THash t) que inicializa um multi-conjunto a vazio
 ```c
 void initEmpty (THash t){
     int i;
@@ -291,7 +291,7 @@ void initEmpty (THash t){
 }
 ```
 
-2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um
+## 2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um
 multi-conjunto
 ```c
 void add (char *s, THash t){
@@ -303,7 +303,7 @@ void add (char *s, THash t){
 }
 ```
 
-3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num
+## 3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num
 multi-conjunto
 ```c
 int lookup (char *s, THash t){
@@ -314,7 +314,7 @@ int lookup (char *s, THash t){
 }
 ```
 
-4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um
+## 4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um
 multi-conjunto.
 ```c
 int remove (char *s, THash t){
@@ -423,7 +423,7 @@ int garb_collection (THash t){
 }
 ```
 
-##4. Uma forma de diagnosticar a qualidade da tabela de hash consiste em acrescentar,em cada célula (bucket), a informação do número de colisões que a inserção dessa chave teve que resolver. Modifique a definição da função de inserção apresentada acima de forma a armazenar também essa informação.
+## 4. Uma forma de diagnosticar a qualidade da tabela de hash consiste em acrescentar,em cada célula (bucket), a informação do número de colisões que a inserção dessa chave teve que resolver. Modifique a definição da função de inserção apresentada acima de forma a armazenar também essa informação.
 ```c
 typedef struct bucket {
 int probC;
