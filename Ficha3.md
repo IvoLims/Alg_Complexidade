@@ -240,7 +240,7 @@ R.: Assumindo `add = O(log(N))` e `remove = O(log(N))`, o pior caso seria dar os
 No caso de uma lista ligada a inserção na cauda seria `O(k)` e a remoção da cabeça seria `O(1)`, o pior caso seria dar os elemento de forma crescente. Sendo assim efetuados N insert's e (N-k) remove's.  
 `O(N*k + (N-k)) = O(N*k)`  
 
-#2 Tabelas de Hash
+# 2 Tabelas de Hash
 
 Nos exercícios seguintes pretende-se usar uma tabela de Hash para implementar multi-conjuntos de strings. Para cada string deve 
 ser guardado o número de vezes que ela ocorre no multiconjunto. As operações em causa são por isso:
@@ -263,7 +263,7 @@ unsigned hash(char *str)
 }
 ```
 
-#2.1 Chaining
+# 2.1 Chaining
 Vamos usar o seguinte tipo.
 ```c
 #define Size 10
