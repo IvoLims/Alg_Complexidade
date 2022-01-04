@@ -387,7 +387,7 @@ int where (char *s, THash t){
 
 }
 ```
-##2. Defina as funções usuais sobre multi-conjuntos:
+## 2. Defina as funções usuais sobre multi-conjuntos:
 
 (a) void initEmpty (THash t) que inicializa um multi-conjunto a vazio
 ```c
