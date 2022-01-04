@@ -319,10 +319,11 @@ void addHash (char *s, THash t){
 ## 3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
 ```c
 int lookup (char *s, THash t){
-    char p = hash(s);
-    int tamanho = Size;
-    while(t[p]->ocorr && t[p]->chave != s && tamanho--) p = (p+1)%Size;
-    return (s == t[p]->chave && t[p]->ocorr);
+    unsigned p = hash(s);
+    for(Nodo* ptr = t[p]; ptr != NULL ; ptr = t[p]->prox){
+      if(strcmp(ptr->chave,s)) return ptr->ocorr; 
+    }
+    return 0;
 }
 ```
 
