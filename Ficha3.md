@@ -211,22 +211,34 @@ Implemente a função heapify usando estas duas estratégias. Para cada uma dela
 caso em que o array original está ordenado por ordem decrescente.
 ```c
 void heapifyUp(int v[], int N){
-
+  for(int i=1; i<N; i++)
+      bubbleUp(i, v);
 }
 
 void heapifyDown(int v[], int N){
-
+  for(int i = (N-1)/2; i>=0 ; i--)
+      bubbleDown1(i, v, N);
 }
 ```
 6. Defina uma função void ordenaHeap (int h[], int N) que, usando a função bubbleDown definida acima, transforma a min-heap h, 
 num array ordenado por ordem decrescente.
 ```c
 void ordenaHeap (int h[], int N){
-
+  for (int i = 1; i < N; i++)
+      {
+      swap(h, 0, N-i);
+      bubbleDown(i, h, N-i);
+      }
 }
 ```
 
 ## 7. Considere o problema de ler uma sequência de N números e seleccionar os k maiores, com k < N, (tipicamente, k muito menor do que N). Uma solução possível consiste em começar por ler os k primeiros elementos e organizálos numa min-heap. Para cada um dos N−k seguintes, caso seja maior do que o menor dos números organizados, insere-se esse elemento na min-heap, removendo o menos dos que lá estão. Analise o custo desta solução (no pior caso) comparando-o com outra solução alternativa de, por exemplo, armazenar os k maiores números lidos numa lista ligada ordenada por ordem crescente. 
+
+R.: Assumindo `add = O(log(N))` e `remove = O(log(N))`, o pior caso seria dar os elemento de forma crescente. Sendo assim efetuados N add's e (N-k) remove's.  
+`O(N*log(k) + (N-k)*log(k)) = O(N*log(k))`
+
+No caso de uma lista ligada a inserção na cauda seria `O(k)` e a remoção da cabeça seria `O(1)`, o pior caso seria dar os elemento de forma crescente. Sendo assim efetuados N insert's e (N-k) remove's.  
+`O(N*k + (N-k)) = O(N*k)`  
 
 #2 Tabelas de Hash
 
