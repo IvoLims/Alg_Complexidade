@@ -117,14 +117,14 @@ typedef struct pQueue
 
 Apresente as definições das operações habituais sobre este género de tipos (buffers).
 
-void empty (PriorityQueue *q) que inicializa q com a fila vazia.
+void empty (PriorityQueue *\q) que inicializa q com a fila vazia.
 ```c
 void empty (PriorityQueue *q){
     q->tamanho = 0;
 }
 ```
 
-int isEmpty (PriorityQueue *q) que testa se está vazia.
+int isEmpty (PriorityQueue *\q) que testa se está vazia.
 ```c
 int isEmpty(PriorityQueue *q)
 {
@@ -134,7 +134,7 @@ int isEmpty(PriorityQueue *q)
 }
 ```
 
-int add (int x, PriorityQueue *q) que adiciona um elemento à fila (retornando 0 se a operação for possível).
+int add (int x, PriorityQueue *\q) que adiciona um elemento à fila (retornando 0 se a operação for possível).
 ```c
 int add(int x, PriorityQueue *q)
 {
@@ -147,7 +147,7 @@ int add(int x, PriorityQueue *q)
 }
 ```
 
-int remove (PriorityQueue *q, int *rem) que remove o próximo elemento
+int remove (PriorityQueue *\q, int *rem) que remove o próximo elemento
 (devolvendo-o em *rem) e retornando 0 se a operação for possível.
 ```c
 int remove(PriorityQueue *q, int *rem)
@@ -220,8 +220,7 @@ void heapifyDown(int v[], int N){
       bubbleDown1(i, v, N);
 }
 ```
-## 6. Defina uma função void ordenaHeap (int h[], int N) que, usando a função bubbleDown definida acima, transforma a min-heap h, 
-num array ordenado por ordem decrescente.
+## 6. Defina uma função void ordenaHeap (int h[], int N) que, usando a função bubbleDown definida acima, transforma a min-heap h, num array ordenado por ordem decrescente.
 ```c
 void ordenaHeap (int h[], int N){
   for (int i = 1; i < N; i++)
@@ -294,7 +293,7 @@ void initEmpty (THash t){
 }
 ```
 
-## 2. void add (char *s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
+## 2. void add (char *\s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
 ```c
 void addHash (char *s, THash t){
      unsigned p = hash(s);
@@ -316,7 +315,7 @@ void addHash (char *s, THash t){
 }
 ```
 
-## 3. int lookup (char *s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
+## 3. int lookup (char *\s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
 ```c
 int lookup (char *s, THash t){
     unsigned p = hash(s);
@@ -327,7 +326,7 @@ int lookup (char *s, THash t){
 }
 ```
 
-## 4. int remove (char *s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
+## 4. int remove (char *\s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
 ```c
 int removeHash (char *s, THash t){
     unsigned p = hash(s);
@@ -423,7 +422,7 @@ void initEmpty (THash t){
   }
 }
 ```
-(b) void add (char *s, THash t) que regista mais uma ocorrência de um elemento
+(b) void add (char *\s, THash t) que regista mais uma ocorrência de um elemento
 a um multi-conjunto
 ```c
 void add (char *s, THash t){
@@ -443,7 +442,7 @@ void add (char *s, THash t){
   }
 }
 ```
-(c) int lookup (char *s, THash t) que calcula a multiplicidade de um elemento
+(c) int lookup (char *\s, THash t) que calcula a multiplicidade de um elemento
 num multi-conjunto
 ```c
 int lookup (char *s, THash t){
@@ -455,7 +454,7 @@ int lookup (char *s, THash t){
   return -1;
 }
 ```
-(d) int remove (char *s, THash t) que remove uma ocorrência de um elemento de
+(d) int remove (char *\s, THash t) que remove uma ocorrência de um elemento de
 um multi-conjunto.
 ```c
 int remover (char *s, THash t){
@@ -473,6 +472,46 @@ int remover (char *s, THash t){
   return 0;
 }
 ```
+
+Para testes
+```c
+void display(THash t){
+  for(int i = 0; i<Size;i++){
+    printf("Status: %d Chave: %s Ocorr: %d\n", t[i].status, t[i].chave, t[i].ocorr);
+  }
+  printf("\n");
+}
+
+int main(){
+	THash t;
+  initEmpty(t);
+  printf("Inicialização:\n");
+  display(t);
+  add("Madara",t);
+  add("Nami",t);
+  add("Boruto",t);
+  add("Luffy",t);
+  add("Naruto",t);
+  add("Sanji",t);
+  add("Sasuke",t);
+  add("Zoro",t);
+  add("Sakura",t);
+  add("Usopp",t);
+  add("Kakashi",t); //Colisão possivel
+  printf("Depois de inserção:\n");
+	display(t);
+  int r1 = lookup("Kakashi",t);
+  printf("Resultado do LookUp: %d\n", r1);
+  int r2 = lookup("Zoro",t);
+  printf("Resultado do LookUp: %d\n\n", r2);
+  remover("Madara",t);
+  remover("Franky",t);
+  printf("Depois de remover:\n");
+  display(t);
+  return 0;
+}
+```
+
 ## 3. Defina a função int garb_collection (THash t) que reconstrói a tabela t de forma a não haver chaves apagadas (status==Del).
 ```c
 int garb_collection (THash t){
