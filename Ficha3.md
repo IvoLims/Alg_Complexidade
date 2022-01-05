@@ -124,7 +124,7 @@ void empty (PriorityQueue *q){
 }
 ```
 
-int isEmpty (PriorityQueue *\q) que testa se está vazia.
+int isEmpty (PriorityQueue \*q) que testa se está vazia.
 ```c
 int isEmpty(PriorityQueue *q)
 {
@@ -134,7 +134,7 @@ int isEmpty(PriorityQueue *q)
 }
 ```
 
-int add (int x, PriorityQueue *\q) que adiciona um elemento à fila (retornando 0 se a operação for possível).
+int add (int x, PriorityQueue \*q) que adiciona um elemento à fila (retornando 0 se a operação for possível).
 ```c
 int add(int x, PriorityQueue *q)
 {
@@ -147,7 +147,7 @@ int add(int x, PriorityQueue *q)
 }
 ```
 
-int remove (PriorityQueue *\q, int *rem) que remove o próximo elemento
+int remove (PriorityQueue \*q, int *rem) que remove o próximo elemento
 (devolvendo-o em *rem) e retornando 0 se a operação for possível.
 ```c
 int remove(PriorityQueue *q, int *rem)
@@ -293,7 +293,7 @@ void initEmpty (THash t){
 }
 ```
 
-## 2. void add (char *\s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
+## 2. void add (char \*s, THash t) que regista mais uma ocorrência de um elemento a um multi-conjunto
 ```c
 void addHash (char *s, THash t){
      unsigned p = hash(s);
@@ -315,7 +315,7 @@ void addHash (char *s, THash t){
 }
 ```
 
-## 3. int lookup (char *\s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
+## 3. int lookup (char \*s, THash t) que calcula a multiplicidade de um elemento num multi-conjunto
 ```c
 int lookup (char *s, THash t){
     unsigned p = hash(s);
@@ -326,7 +326,7 @@ int lookup (char *s, THash t){
 }
 ```
 
-## 4. int remove (char *\s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
+## 4. int remove (char \*s, THash t) que remove uma ocorrência de um elemento de um multi-conjunto.
 ```c
 int removeHash (char *s, THash t){
     unsigned p = hash(s);
@@ -401,7 +401,7 @@ typedef struct bucket {
 } THash [Size];
 ```
 
-## 1. Comece por definir a função int where (char *s, THash t) que calcula o índice de t onde s está (ou devia estar) armazenada.
+## 1. Comece por definir a função int where (char \*s, THash t) que calcula o índice de t onde s está (ou devia estar) armazenada.
 ```c
 int where (char *s, THash t){
     int c, hash = 5381;
@@ -422,7 +422,7 @@ void initEmpty (THash t){
   }
 }
 ```
-(b) void add (char *\s, THash t) que regista mais uma ocorrência de um elemento
+(b) void add (char \*s, THash t) que regista mais uma ocorrência de um elemento
 a um multi-conjunto
 ```c
 void add (char *s, THash t){
@@ -442,7 +442,7 @@ void add (char *s, THash t){
   }
 }
 ```
-(c) int lookup (char *\s, THash t) que calcula a multiplicidade de um elemento
+(c) int lookup (char \*s, THash t) que calcula a multiplicidade de um elemento
 num multi-conjunto
 ```c
 int lookup (char *s, THash t){
@@ -454,7 +454,7 @@ int lookup (char *s, THash t){
   return -1;
 }
 ```
-(d) int remove (char *\s, THash t) que remove uma ocorrência de um elemento de
+(d) int remove (char \*s, THash t) que remove uma ocorrência de um elemento de
 um multi-conjunto.
 ```c
 int remover (char *s, THash t){
@@ -499,7 +499,7 @@ int main(){
   add("Usopp",t);
   add("Kakashi",t); //Colisão possivel
   printf("Depois de inserção:\n");
-	display(t);
+  display(t);
   int r1 = lookup("Kakashi",t);
   printf("Resultado do LookUp: %d\n", r1);
   int r2 = lookup("Zoro",t);
@@ -522,8 +522,8 @@ int garb_collection (THash t){
 ## 4. Uma forma de diagnosticar a qualidade da tabela de hash consiste em acrescentar,em cada célula (bucket), a informação do número de colisões que a inserção dessa chave teve que resolver. Modifique a definição da função de inserção apresentada acima de forma a armazenar também essa informação.
 ```c
 typedef struct bucket {
-int probC;
-int status;  Free | Used | Del
-char *chave; int ocorr;
+    int probC;
+    int status;  //Free | Used | Del
+    char *chave; int ocorr;
 } THash [Size];
 ```
