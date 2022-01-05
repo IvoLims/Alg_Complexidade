@@ -125,7 +125,73 @@ int main(){
 ```
 # 2 Travessias
 Considere as seguintes definições de funções que fazem travessias de grafos.
+```c
+int DF(GrafoL g, int or, int v[], int p[], int l[])
+{
+    int i;
+    for (i = 0; i < NV; i++)
+    {
+        v[i] = 0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    p[or] = -1;
+    l[or] = 0;
+    return DFRec(g, or, v, p, l);
+}
 
+int DFRec(GrafoL g, int or, int v[], int p[], int l[])
+{
+    int i;
+    LAdj a;
+    i = 1;
+    v[or] = -1;
+    for (a = g[or];
+         a != NULL;
+         a = a->prox)
+        if (!v[a->dest])
+        {
+            p[a->dest] = or ;
+            l[a->dest] = 1 + l[or];
+            i += DFRec(g, a->dest, v, p, l);
+        }
+    v[or] = 1;
+    return i;
+}
+
+int BF(GrafoL g, int or, int v[], int p[], int l[])
+{
+    int i, x;
+    LAdj a;
+    int q[NV], front, end;
+    for (i = 0; i < NV; i++)
+    {
+        v[i] = 0;
+        p[i] = -1;
+        l[i] = -1;
+    }
+    front = end = 0;
+    q[end++] = or ; //enqueue
+    v[or] = 1;
+    p[or] = -1;
+    l[or] = 0;
+    i = 1;
+    while (front != end)
+    {
+        x = q[front++]; //dequeue
+        for (a = g[x]; a != NULL; a = a->prox)
+            if (!v[a->dest])
+            {
+                i++;
+                v[a->dest] = 1;
+                p[a->dest] = x;
+                l[a->dest] = 1 + l[x];
+                q[end++] = a->dest; //enqueue
+            }
+    }
+    return i;
+}
+```
 Usando estas funções ou adaptações destas funções, defina as seguintes.
 ## 1. A função int maisLonga (GrafoL g, int or, int p[]) que calcula a distância (número de arestas) que separa o vértice v do que lhe está mais distante. A função deverá preencher o array p com os vértices correpondentes a esse caminho.
 
@@ -139,6 +205,7 @@ O robot pode-se deslocar na vertical (Norte/Sul): passando da posição (a,b) pa
 Defina a função int caminho (int L, int C, char *mapa[L], int ls, int cs, int lf, int cf) que determina o número mínimo de movimentos para chegar do ponto (ls,cs) ao ponto (lf,cf).
 Pode ainda generalizar essa função de forma a imprimir no ecran a sequência de movimentos necessários.
 Sugestão: Em alguns casos as representações habituais de grafos introduzem um grand overhead no processo. Neste caso em particular, a informação sobre os adjacentes a um vértice (ponto do mapa) pode ser facilmente obtida por inspecção da matriz que representa o mapa.
+
 Por exemplo, para o mapa
 ```c
 char *mapa [10] = {"##########"
