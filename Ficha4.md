@@ -16,7 +16,7 @@ typedef struct aresta {
 typedef int GrafoM [NV][NV];
 ```
 Para cada uma das funções descritas abaixo, analize a sua complexidade no pior caso.
-## 1. Defina a função void fromMat (GrafoM in, GrafoL out) que constrói o grafo out a partir do grafo in. Considere que in[i][j] == 0 sse não existe a aresta i −→ j.
+## 1. Defina a função void fromMat (GrafoM in, GrafoL out) que constrói o grafo out a partir do grafo in. Considere que in[i][j] == 0 sse não existe a aresta i → j.
 ```c
 void fromMat (GrafoM o, GrafoL d){
   int i,j;
@@ -71,7 +71,7 @@ R.: O(NV+E) sendo E o número de arestas do grafo mas pode ser otimizado para O(
 
 ## 4. Uma coloração de um grafo é uma função (normalmente representada como um array de inteiros) que atribui a cada vértice do grafo a sua cor, de tal forma que, vértices adjacentes (i.e., que estão ligados por uma aresta) têm cores diferentes. Defina uma função int colorOK (GrafoL g, int cor[]) que verifica se o array cor corresponde a uma coloração válida do grafo.
 
-## 5. Um homomorfismo de um grafo g para um grafo h é uma função f (representada como um array de inteiros) que converte os vértices de g nos vértices de h tal que, para cada aresta a −→ b de g existe uma aresta f(a) −→ f(b) em h. Defina uma função int homomorfOK (GrafoL g, GrafoL h, int f[]) que verifica se a função f é um homomorfismo de g para h.
+## 5. Um homomorfismo de um grafo g para um grafo h é uma função f (representada como um array de inteiros) que converte os vértices de g nos vértices de h tal que, para cada aresta a → b de g existe uma aresta f(a) → f(b) em h. Defina uma função int homomorfOK (GrafoL g, GrafoL h, int f[]) que verifica se a função f é um homomorfismo de g para h.
 
 Para Testes:
 ```c
@@ -204,7 +204,7 @@ Usando estas funções ou adaptações destas funções, defina as seguintes.
 
 ## 2. A função int componentes (GrafoL g, int c[]) recebe como argumento um grafo não orientado g e calcula as componentes ligadas de g, i.e., preenche o array c de tal forma que, para quaisquer par de vértices x e y, c[x] == c[y] sse existe um caminho a ligar x a y. A função deve retornar o número de componentes do grafo.
 
-## 3. Num grafo orientado e acíclico, uma ordenação topológica dos seus vértices é uma sequência dos vértices do grafo em que, se existe uma aresta a −→ b então o vértice a aparece antes de b na sequência. Consequentemente, qualquer vértice aparece na sequência depois de todos os seus alcançáveis. A função int ordTop (GrafoL g, int ord[]) preenche o array ord com uma ordenação topológica do grafo.
+## 3. Num grafo orientado e acíclico, uma ordenação topológica dos seus vértices é uma sequência dos vértices do grafo em que, se existe uma aresta a → b então o vértice a aparece antes de b na sequência. Consequentemente, qualquer vértice aparece na sequência depois de todos os seus alcançáveis. A função int ordTop (GrafoL g, int ord[]) preenche o array ord com uma ordenação topológica do grafo.
 
 ## 4. Considere o problema de guiar um robot através de um mapa com obstáculos. O mapa é guardado numa matriz de caracteres em que o caracter ’#’ representa um obstáculo. A posição (0,0) corresponde ao canto superior esquerdo do mapa e a posição (L,C) corresponde ao canto inferior direito.
 
