@@ -514,8 +514,30 @@ int main(){
 
 ## 3. Defina a função int garb_collection (THash t) que reconstrói a tabela t de forma a não haver chaves apagadas (status==Del).
 ```c
-int garb_collection (THash t){
+void copy(char* nova, int novasOcorr,THash t){
+  int i;
+  for(i = where(nova,t); i < Size; i = (i+1) % Size)
+      t[i].status = Used;
+      strcpy(t[i].chave,nova);
+      t[i].ocorr = novasOcorr; 
+}
 
+int garb_collection (THash t){
+  int i,j = 0;
+  char* nova[Size];
+  int novasOcorr[Size];
+  for(i = 0; i < Size ; i++){
+    if(t[i].status == Used){
+      novasOcorr[j] = t[i].ocorr;
+      strcpy(nova[j],t[i].chave);
+      j++;
+    }
+    initEmpty(t);
+    for(i=0 ; i < j ; i++){
+      copy(nova[i],novasOcorr[i],t);
+    }
+  }
+  return 0;
 }
 ```
 
