@@ -447,14 +447,30 @@ void add (char *s, THash t){
 num multi-conjunto
 ```c
 int lookup (char *s, THash t){
-
+  int i, pos = where(s,t);
+  for(i=0; t[pos].status != Free && i < Size; i++, pos = i % Size){
+    if(strcmp(t[pos].chave,s))
+    return t[pos].ocorr;
+  }
+  return -1;
 }
 ```
 (d) int remove (char *s, THash t) que remove uma ocorrência de um elemento de
 um multi-conjunto.
 ```c
-int remove (char *s, THash t){
-
+int remover (char *s, THash t){
+  int i, pos = where(s,t);
+  for(i=0; strcmp(t[pos].chave,s) ; i++, pos = i%Size){
+    if(t[pos].status == Free || i == Size){
+      return -1;
+    }
+  }
+  t[pos].ocorr--;
+  if(t[pos].ocorr == 0){
+    t[pos].status = Del;
+    t[pos].chave = NULL;
+  }
+  return 0;
 }
 ```
 ## 3. Defina a função int garb_collection (THash t) que reconstrói a tabela t de forma a não haver chaves apagadas (status==Del).
