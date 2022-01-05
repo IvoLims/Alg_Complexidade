@@ -1,0 +1,155 @@
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+```
+# 1. Representações
+Considere os seguintes tipos para representar grafos.
+```c
+#define NV 6
+typedef struct aresta {
+    int dest; 
+    int custo;
+    struct aresta *prox;
+} *LAdj, *GrafoL [NV];
+
+typedef int GrafoM [NV][NV];
+```
+Para cada uma das funções descritas abaixo, analize a sua complexidade no pior caso.
+## 1. Defina a função void fromMat (GrafoM in, GrafoL out) que constrói o grafo out a partir do grafo in. Considere que in[i][j] == 0 sse não existe a aresta i −→ j.
+```c
+void fromMat (GrafoM o, GrafoL d){
+  int i,j;
+  struct aresta* aux;
+  for(i=0; i<NV; i++) d[i] = NULL;
+  for(i = 0; i<NV; i++){
+      for(j = 0; j<NV; j++){
+          if(o[i][j] != 0){
+             aux = malloc(sizeof(struct aresta));
+             aux -> dest = j;
+             aux -> custo = o[i][j];
+             aux -> prox = d[i];
+             d[i] = aux;
+          }
+      }
+  }
+}
+```
+## 2. Defina a função void inverte (GrafoL in, GrafoL out) que constrói o grafo out como o inverso do grafo in.
+```c
+void inverte (GrafoL o, GrafoM d){
+  int j,i;
+  struct aresta* aux;
+  for(i = 0,j=0; i<NV && j<NV; i++,j++) d[i][j] = 0;
+  for(i=0;i<NV;i++){
+    for(aux=o[i]; aux != NULL; aux = aux->prox){
+      d[i][aux->dest] = aux->custo;
+    }
+  }
+}
+```
+## 3. O grau de entrada (saída) de um grafo define-se como o número máximo de arestas que têm como destino (origem) um qualquer vértice. Defina a função int inDegree (GrafoL g) que calcula o grau de entrada do grafo.
+```c
+int inDegree (GrafoL o){
+  int i,res=0;
+  int v = 1; // vertice que quero chegar
+  struct aresta* aux;
+  for(i = 0; i<NV;i++){
+    aux=o[i];
+    for(;aux && aux->dest < v;aux=aux->prox){
+      res++;
+    }
+  }
+  return res;
+}
+```
+## 4. Uma coloração de um grafo é uma função (normalmente representada como um array de inteiros) que atribui a cada vértice do grafo a sua cor, de tal forma que, vértices adjacentes (i.e., que estão ligados por uma aresta) têm cores diferentes. Defina uma função int colorOK (GrafoL g, int cor[]) que verifica se o array cor corresponde a uma coloração válida do grafo.
+## 5. Um homomorfismo de um grafo g para um grafo h é uma função f (representada como um array de inteiros) que converte os vértices de g nos vértices de h tal que, para cada aresta a −→ b de g existe uma aresta f(a) −→ f(b) em h. Defina uma função int homomorfOK (GrafoL g, GrafoL h, int f[]) que verifica se a função f é um homomorfismo de g para h.
+
+Para Testes:
+```c
+void initGrafoL(GrafoL l){
+  int i;
+  for(i = 0; i<NV ;i++)
+      l[i] = malloc(sizeof(struct aresta));
+      l[i] = NULL;
+}
+
+void printGrafoL(GrafoL l){
+  int i;
+  for(i = 0; i<NV ;i++){
+    if(l[i] == NULL) printf("O Grafo está a Null\n");
+    else printf("Dest: %d Custo: %d\n",l[i]->dest, l[i]->custo);
+  }
+  printf("\n");
+}
+
+void printMatriz(GrafoM m){
+  int i,j;
+  for(i = 0; i<NV; i++){
+      for(j = 0; j<NV; j++){
+        printf("Em m[%d][%d]: %d %d\n",i,j,m[i][0],m[0][j]);
+      }
+  }
+  printf("\n");
+}
+
+int main(){
+  GrafoL l;
+  GrafoM arr;
+  for(int i = 0; i<NV; i++)
+    for(int j = 0; j<NV; j++)
+        arr[i][j] = 0;
+  arr[0][1] = 4;
+  arr[0][2] = 3;
+  arr[0][4] = 1;
+  arr[1][4] = 4;
+  arr[2][0] = 2;
+  arr[3][2] = 1;
+	arr[3][5] = 2;
+  arr[4][3] = 3;
+  arr[5][4] = 1;
+  printMatriz(arr);
+  printf("Inicialização:\n");
+  initGrafoL(l);
+  printGrafoL(l);
+  printf("Matriz para Grafo:\n");
+  fromMat(arr, l);
+  printGrafoL(l);
+  printf("Grafo para Matriz:\n");
+  inverte(l,arr);
+  printMatriz(arr);
+  int res = inDegree(l);
+  printf("Grau de entrada: %d\n",res);
+}
+```
+# 2 Travessias
+Considere as seguintes definições de funções que fazem travessias de grafos.
+
+Usando estas funções ou adaptações destas funções, defina as seguintes.
+## 1. A função int maisLonga (GrafoL g, int or, int p[]) que calcula a distância (número de arestas) que separa o vértice v do que lhe está mais distante. A função deverá preencher o array p com os vértices correpondentes a esse caminho.
+
+## 2. A função int componentes (GrafoL g, int c[]) recebe como argumento um grafo não orientado g e calcula as componentes ligadas de g, i.e., preenche o array c de tal forma que, para quaisquer par de vértices x e y, c[x] == c[y] sse existe um caminho a ligar x a y. A função deve retornar o número de componentes do grafo.
+
+## 3. Num grafo orientado e acíclico, uma ordenação topológica dos seus vértices é uma sequência dos vértices do grafo em que, se existe uma aresta a −→ b então o vértice a aparece antes de b na sequência. Consequentemente, qualquer vértice aparece na sequência depois de todos os seus alcançáveis. A função int ordTop (GrafoL g, int ord[]) preenche o array ord com uma ordenação topológica do grafo.
+
+## 4. Considere o problema de guiar um robot através de um mapa com obstáculos. O mapa é guardado numa matriz de caracteres em que o caracter ’#’ representa um obstáculo. A posição (0,0) corresponde ao canto superior esquerdo do mapa e a posição (L,C) corresponde ao canto inferior direito.
+
+O robot pode-se deslocar na vertical (Norte/Sul): passando da posição (a,b) para a posição (a+1,b)/(a-1,b); ou na horizontal (Este/Oeste): passando da posição (a,b) para a posição (a,b+1)/(a,b-1).
+Defina a função int caminho (int L, int C, char *mapa[L], int ls, int cs, int lf, int cf) que determina o número mínimo de movimentos para chegar do ponto (ls,cs) ao ponto (lf,cf).
+Pode ainda generalizar essa função de forma a imprimir no ecran a sequência de movimentos necessários.
+Sugestão: Em alguns casos as representações habituais de grafos introduzem um grand overhead no processo. Neste caso em particular, a informação sobre os adjacentes a um vértice (ponto do mapa) pode ser facilmente obtida por inspecção da matriz que representa o mapa.
+Por exemplo, para o mapa
+```c
+char *mapa [10] = {"##########"
+                  ,"# # # #"
+                  ,"# # # # #"
+                  ,"# # # #"
+                  ,"##### # #"
+                  ,"# # #"
+                  ,"## #### #"
+                  ,"# # #"
+                  ,"# # #"
+                  ,"##########"};
+```
+a invocação caminho (10, 10, mapa, 1,1,1,8) deverá dar como resultado 31.
