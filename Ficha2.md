@@ -239,6 +239,7 @@ else return (x&1 - y&1);
 }
 ```
 Assumindo que a probabilidade de dois bits aleatórios serem iguais é 0.5, determine o custo médio (número de comparações entre elementos dos arrays) desta função.
+
 R.: N * (1/2)^N + sum_{1 <= i <= N} i * (1/2)^i
 
 ## 4. Considere a seguinte definição da função inc que recebe um array de N bits (representando um inteiro x) e que modifica o array de forma a representar x+1.
@@ -253,6 +254,7 @@ return 0;
 }
 ```
 Calcule o custo médio desta função (em termos do número de bit alterados).
+
 R.: N * (1/2)^N + sum_{1 <= i <= N} i * (1/2)^i
 
 ## 5. Relembre o algoritmo de procura numa árvore binária de procura.
@@ -265,6 +267,7 @@ return (a!=NULL);
 }
 ```
 Analise a complexidade média (em termos de número de nodos consultados) desta função, assumindo que o elemento que se procura existe com igual probabilidade em cada posição da árvore. Faça esta análise para duas configurações extremas de árvores: (1) árvores equilibradas (os elementos estão distribuidos uniformemente pelas duas sub-árvores) ou (2) árvores ”lista” (em que cada nodo tem pelo menos uma das sub-árvores vazias).
+
 R.:
 
 **Árvores equilibradas:** sum_{0 <= i <= log_2(N)} 2^i * 1/N
