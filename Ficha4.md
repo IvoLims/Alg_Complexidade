@@ -106,7 +106,7 @@ int main(){
   arr[1][4] = 4;
   arr[2][0] = 2;
   arr[3][2] = 1;
-	arr[3][5] = 2;
+  arr[3][5] = 2;
   arr[4][3] = 3;
   arr[5][4] = 1;
   printMatriz(arr);
