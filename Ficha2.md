@@ -214,6 +214,10 @@ return i;
 ```
 Considerando que os valores do array são perfeitamente aleatórios e por isso, para qualquer índice i, a probabilidade de a posição i conter um valor menor do que a posição i-1 é 0.5. Calcule o número médio de comparações efectuadas por esta função. Com base no resultado obtido, calcule o custo médio da função maxcresc apresentada na Secção 1.
 
+R.: **Nº médio de comparações =** (N-1) * (1/2)^(N-1) + sum_{0 < i < N} i * (1/2)^i
+
+**maxcresc =** sum_{0 <= i <= N-2} 2 - 1/(2^(N-i-2)
+
 ## 2. Com as mesmas considerações feitas na alínea anterior, num array aleatório v, e para cada posição i, em média, metade dos elementos de v entre as posições 0 e i são maiores do que v[i]. Com base neste facto, faça a análise de tempo médio da função iSort apresentada na Secção 1.
 
 ## 3. Considere a função intcmp que recebe como argumento dois arrays de N bits (representando dois inteiros) e compara os valores representados. Note que a função cmp é a mesma função, com os inteiros x e y representados da forma habitual.
@@ -235,6 +239,7 @@ else return (x&1 - y&1);
 }
 ```
 Assumindo que a probabilidade de dois bits aleatórios serem iguais é 0.5, determine o custo médio (número de comparações entre elementos dos arrays) desta função.
+R.: N * (1/2)^N + sum_{1 <= i <= N} i * (1/2)^i
 
 ## 4. Considere a seguinte definição da função inc que recebe um array de N bits (representando um inteiro x) e que modifica o array de forma a representar x+1.
 ```c
@@ -248,8 +253,9 @@ return 0;
 }
 ```
 Calcule o custo médio desta função (em termos do número de bit alterados).
+R.: N * (1/2)^N + sum_{1 <= i <= N} i * (1/2)^i
 
-## 5. Relembre o algiritmo de procura numa árvore binária de procura.
+## 5. Relembre o algoritmo de procura numa árvore binária de procura.
 ```c
 int elem (int x, ABin a){
 while (a != NULL && a->valor != x)
@@ -259,6 +265,11 @@ return (a!=NULL);
 }
 ```
 Analise a complexidade média (em termos de número de nodos consultados) desta função, assumindo que o elemento que se procura existe com igual probabilidade em cada posição da árvore. Faça esta análise para duas configurações extremas de árvores: (1) árvores equilibradas (os elementos estão distribuidos uniformemente pelas duas sub-árvores) ou (2) árvores ”lista” (em que cada nodo tem pelo menos uma das sub-árvores vazias).
+R.:
+
+**Árvores equilibradas:** sum_{0 <= i <= log_2(N)} 2^i * 1/N
+
+**Árvores ”lista”:** sum_{0 < i <= N} i * (1/N)^i
 
 # 4 Análise amortizada
 ## 1. Uma implementação possível de uma fila de espera (Queue) utiliza duas stacks A e B, por exemplo:
