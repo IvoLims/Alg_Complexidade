@@ -117,7 +117,7 @@ typedef struct pQueue
 
 Apresente as definições das operações habituais sobre este género de tipos (buffers).
 
-void empty (PriorityQueue *\q) que inicializa q com a fila vazia.
+void empty (PriorityQueue \*q) que inicializa q com a fila vazia.
 ```c
 void empty (PriorityQueue *q){
     q->tamanho = 0;
