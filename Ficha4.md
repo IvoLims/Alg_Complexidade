@@ -35,6 +35,8 @@ void fromMat (GrafoM o, GrafoL d){
   }
 }
 ```
+R.: O(NV^3) mas pode ser otimizado para O(NV^2).
+
 ## 2. Defina a função void inverte (GrafoL in, GrafoL out) que constrói o grafo out como o inverso do grafo in.
 ```c
 void inverte (GrafoL o, GrafoM d){
@@ -48,6 +50,8 @@ void inverte (GrafoL o, GrafoM d){
   }
 }
 ```
+R.: O(NV^3) mas pode ser otimizado para O(NV^2).
+
 ## 3. O grau de entrada (saída) de um grafo define-se como o número máximo de arestas que têm como destino (origem) um qualquer vértice. Defina a função int inDegree (GrafoL g) que calcula o grau de entrada do grafo.
 ```c
 int inDegree (GrafoL o){
@@ -63,7 +67,10 @@ int inDegree (GrafoL o){
   return res;
 }
 ```
+R.: O(NV+E) sendo E o número de arestas do grafo mas pode ser otimizado para O(E).
+
 ## 4. Uma coloração de um grafo é uma função (normalmente representada como um array de inteiros) que atribui a cada vértice do grafo a sua cor, de tal forma que, vértices adjacentes (i.e., que estão ligados por uma aresta) têm cores diferentes. Defina uma função int colorOK (GrafoL g, int cor[]) que verifica se o array cor corresponde a uma coloração válida do grafo.
+
 ## 5. Um homomorfismo de um grafo g para um grafo h é uma função f (representada como um array de inteiros) que converte os vértices de g nos vértices de h tal que, para cada aresta a −→ b de g existe uma aresta f(a) −→ f(b) em h. Defina uma função int homomorfOK (GrafoL g, GrafoL h, int f[]) que verifica se a função f é um homomorfismo de g para h.
 
 Para Testes:
