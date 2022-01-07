@@ -1,3 +1,8 @@
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+```
 # 1. Min-heaps
 
 Uma min-heap é uma árvore binária em que cada nodo é menor ou igual a todos os seus sucessores.
