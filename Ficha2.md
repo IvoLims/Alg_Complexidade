@@ -299,7 +299,7 @@ R.:
 
 **Melhor Caso:** A stack A não tem nenhum elemento, T(n) = 1
 
-**Pior:** A stack A está cheia e temos de de fazer pop e push na stack B, T(n) = (N^2) +1
+**Pior:** A stack A está cheia e temos de de fazer pop e push na stack B mas apenas tem custo o push, T(n) = N
 
 (b) Mostre que o custo amortizado de cada uma das operações de enqueue ou dequeue numa sequência de N operações é O(1) usando o método do potencial.
 
