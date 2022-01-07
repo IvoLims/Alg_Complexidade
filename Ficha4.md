@@ -67,7 +67,7 @@ int inDegree (GrafoL o){
   return res;
 }
 ```
-R.: O(NV+E) sendo E o número de arestas do grafo mas pode ser otimizado para O(E).
+R.: O(NV+E).
 
 ## 4. Uma coloração de um grafo é uma função (normalmente representada como um array de inteiros) que atribui a cada vértice do grafo a sua cor, de tal forma que, vértices adjacentes (i.e., que estão ligados por uma aresta) têm cores diferentes. Defina uma função int colorOK (GrafoL g, int cor[]) que verifica se o array cor corresponde a uma coloração válida do grafo.
 
