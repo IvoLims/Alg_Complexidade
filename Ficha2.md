@@ -288,6 +288,19 @@ Stack b;
 
 (a) Efectue a análise do tempo de execução no melhor e no pior caso das funções enqueue e dequeue, assumindo que todas as operações das stacks são realizadas em tempo constante.
 
+R.:
+**Enqueue:**
+
+**Melhor Caso:** A stack A não tem nenhum elemento para inserir, T(n) = 1 ou T(n) = k
+
+**Pior:** Tem de se adicionar toda a stack A, T(n) = N
+
+**Dequeue:**
+
+**Melhor Caso:** A stack A não tem nenhum elemento, T(n) = 1
+
+**Pior:** A stack A está cheia e temos de de fazer pop e push na stack B, T(n) = (N^2) +1
+
 (b) Mostre que o custo amortizado de cada uma das operações de enqueue ou dequeue numa sequência de N operações é O(1) usando o método do potencial.
 
 ## 2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
