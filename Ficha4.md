@@ -71,7 +71,41 @@ R.: O(NV+E) sendo E o número de arestas do grafo mas pode ser otimizado para O(
 
 ## 4. Uma coloração de um grafo é uma função (normalmente representada como um array de inteiros) que atribui a cada vértice do grafo a sua cor, de tal forma que, vértices adjacentes (i.e., que estão ligados por uma aresta) têm cores diferentes. Defina uma função int colorOK (GrafoL g, int cor[]) que verifica se o array cor corresponde a uma coloração válida do grafo.
 
+```c
+int colorOK (GrafoL g, int cor[]) {
+    int o;
+    LAdj d;
+
+    for (o = 0; o < NV; o++)
+        for (d = g[o]; d != NULL; d = d->prox)
+            if(cor[o] == cor[d->dest])
+                return 0;
+
+    return 1;
+}
+```
+R.: O(NV+E)
 ## 5. Um homomorfismo de um grafo g para um grafo h é uma função f (representada como um array de inteiros) que converte os vértices de g nos vértices de h tal que, para cada aresta a → b de g existe uma aresta f(a) → f(b) em h. Defina uma função int homomorfOK (GrafoL g, GrafoL h, int f[]) que verifica se a função f é um homomorfismo de g para h.
+```c
+int homomorfOK (GrafoL g, GrafoL h, int f[]) {
+    int o;
+    LAdj a, b;
+
+    for (o = 0; o < NV; o++) {
+        for (a = g[o]; a != NULL; a = a->prox) {
+            for (b = h[f[a]]; b != NULL; b = b->prox)
+                if(a->dest == f[b->dest])
+                    break;
+            
+            if (b == NULL)
+                return 0;
+        }
+    }
+
+    return 1;
+}
+```
+R.: O(NV+E)
 
 Para Testes:
 ```c
