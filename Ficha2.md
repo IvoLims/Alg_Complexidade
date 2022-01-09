@@ -309,7 +309,9 @@ Seja Φ (s) o dobro do número de elementos em S1.
 
 Um dequeue terá no mínimo um custo real de 2 (vazio + sair da S2). No caso de S2 estar vazio e x for o número de elementos em S1, temos de fazer pop de S1 x vezes fazendo push para S2 x vezes (tendo um custo real de 2x), mas istoo será cancelado pela redução no potencial de precisamente 2x. O custo amortizado é 2.
 
-Levando-nos a ter um custo amortizado constante! 
+Levando-nos a ter um custo amortizado constante!
+
+(Mais info aqui: https://www.dcc.fc.up.pt/~pribeiro/aulas/alg1819/slides/3_amortized_08102018.pdf)
 
 ## 2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
 ```c
