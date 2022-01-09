@@ -303,6 +303,14 @@ R.:
 
 (b) Mostre que o custo amortizado de cada uma das operações de enqueue ou dequeue numa sequência de N operações é O(1) usando o método do potencial.
 
+Seja Φ (s) o dobro do número de elementos em S1.
+
+Φ (s0) = 0 e Φ (st) ≥ 0 para todos os estados st conforme necessário Um equeue terá um custo real de 1 (push para S1) mais um aumento de 2 no potencial, resultando num custo amortizado de 3.
+
+Um dequeue terá no mínimo um custo real de 2 (vazio + sair da S2). No caso de S2 estar vazio e x for o número de elementos em S1, temos de fazer pop de S1 x vezes fazendo push para S2 x vezes (tendo um custo real de 2x), mas istoo será cancelado pela redução no potencial de precisamente 2x. O custo amortizado é 2.
+
+Levando-nos a ter um custo amortizado constante! 
+
 ## 2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
 ```c
 void multiPop(S,k) {
