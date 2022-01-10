@@ -360,7 +360,6 @@ R.:
 R.:
 
 Queremos analisar o custo agregado de inserir 20,70,60,30,40,50,10,80.
-
 Temos que inicialmente a stack está vazia. Ou seja, 
      
      -> Podemos fazer logo a inserção de 20. Logo, T(N)=1.
@@ -380,7 +379,5 @@ Temos que inicialmente a stack está vazia. Ou seja,
      -> Inserção do 80 (Temos que apagar tudo, ou seja, o 10,50,60,70 e inserir o 80) T(N)=5
      
 Temos que o custo agragado é dado por: 1/n\* sum(i=0 to n) ci = 1/8 \*(1+2+1+1+2+2+1+5)=1/8 \* 15 = 2.
-
 Logo, todas operações acima têm custo agregado de 2.
-
 Relativamente ao custo amortizado, temos que é 2.
