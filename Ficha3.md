@@ -553,4 +553,78 @@ typedef struct bucket {
     int status;  //Free | Used | Del
     char *chave; int ocorr;
 } THash [Size];
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define Size 11
+#define Free 0
+#define Used 1
+#define Del 2
+typedef struct bucket {
+    int probC;
+    int status;  //Free | Used | Del
+    char *chave; int ocorr;
+} THash [Size];
+
+int where (char *s, THash t){
+    int c, hash = 5381;
+    while (c == *s++)
+        hash *= 33 + c;
+    return hash % Size;
+}
+
+void init(THash t){
+  int i;
+  for(i =0; i<Size;i++){
+      t[i].status = Free;
+      t[i].probC = 0;
+      t[i].chave = "";
+      t[i].ocorr = 0;
+  }
+}
+
+void addHash(THash t, char *val){
+  int i;
+  int pos = where(val,t);
+  for(int i=0; i<Size && t[pos].status>Free; i++, pos = i%Size){
+      if(strcmp(t[pos].chave,val)){
+         t[i].ocorr++; 
+         t[i].probC = i/Size;
+         return;
+      }
+  }
+  if(t[i].status == Free){
+    t[i].ocorr = 1;
+    t[i].status = Used;
+    strcpy(t[i].chave, val);
+    t[i].probC = 0;
+  } else{
+    printf("Something went wrong the table is full\n");
+  }
+}
+
+void printHash(THash t){
+  int i;
+  for(i = 0;i<Size; i++){
+    printf("Probc: %d Status: %d Chave: %s Ocorr: %d\n",t[i].probC, t[i].status, t[i].chave, t[i].ocorr);
+  }
+  printf("\n");
+}
+
+int main(){
+  THash t;
+  printf("Inicialização:\n");
+  init(t);
+  printHash(t);
+  printf("Inserção:\n");
+  addHash(t,"Sakura");
+  addHash(t,"Sakura");
+  addHash(t,"Sakura");
+  addHash(t,"Sakura");
+  addHash(t,"Sakura");
+  printHash(t);
+  return 0;
+}
 ```
