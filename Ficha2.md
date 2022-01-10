@@ -383,4 +383,4 @@ Temos que o custo agragado é dado por: 1/n\* sum(i=0 to n) ci = 1/8 \*(1+2+1+1+
 
 Logo, todas operações acima têm custo agregado de 2.
 
-Relativamente ao custo amortizado, temos que   
+Relativamente ao custo amortizado, temos que é 2.
