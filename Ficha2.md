@@ -316,10 +316,10 @@ Levando-nos a ter um custo amortizado constante!
 ## 2. Considere-se uma estrutura de dados do tipo stack com a habitual operação ‘push‘, mas em que a operação ‘pop‘ é substituída por uma operação ‘multipop‘, uma generalização que remove os k primeiros elementos, deixando a pilha vazia caso contenha menos de k elementos. Uma implementação possível será
 ```c
 void multiPop(S,k) {
-while (!IsEmpty(S) && k != 0) {
-pop(S);
-k -= 1;
-}
+     while (!IsEmpty(S) && k != 0) {
+           pop(S);
+           k -= 1;
+     }
 }
 ```
 Pela análise tradicional de pior caso,
@@ -330,16 +330,57 @@ Pela análise tradicional de pior caso,
 
 Utilize um dos métodos estudados, para mostrar que em termos amortizados a operação ‘multiPop‘ executa também ela em tempo constante O(1).
 
+R.: Consideremos o método do potencial e, ainda, que O(s) corresponde ao dobro do número de elementos existentes na stack. Temos que O(s0)=0 e O(st)>=0 para todos os estados st.
+Temos que, se a stack estiver vazia, tem um custo de 1(não é necessário fazer pop). Mas no caso, em que existem x elementos, é necessário fazer um 1 multiPop(S,x), o que corresponde a fazer x vezes a instrução pop, o que dá  um custo de x. Mas considerando a diminuição do potencial em x, ficamos com um custo amortizado de 1. Logo executa em tempo constante. 
+
 ## 3. Considere um algoritmo de inserção ordenada numa lista (crescente), com uma particularidade: são apagados os nós iniciais da lista contendo valores inferiores ao que está a ser inserido. Por exemplo, a inserção de 30 na lista [10, 20, 40, 50] resulta na lista [30, 40, 50]. A função seguinte implementa este algoritmo em C.
 ```c
 node *insert_rem (node *p, int x) {
-node *new = malloc(sizeof(node)); new->value = x;
-while (p && x > p->value)
-{ aux = p; p = p->next; free (aux); }
-new->next = p;
-return new;
+     node *new = malloc(sizeof(node)); new->value = x;
+     while (p && x > p->value)
+     { 
+      aux = p; 
+      p = p->next; 
+      free (aux); 
+     }
+     new->next = p;
+     return new;
 }
 ```
 (a) Analise o tempo de execução assimptótico de ‘insert rem‘, identificando o pior e o melhor caso.
 
+R.:
+
+**Melhor caso:** Quando temos que todos os elementos da lista, são maiores que o valor de x. Ou seja, não é necessário apagar os elementos, basta apenas fazer a inserção. T(N)=1
+
+**Pior Caso:** Quando todos os elementos da lista, são menores que x. Ou seja, é necessário apagar todos os elementos e só depois adicionar o x. T(N)=N
+
 (b) Em termos amortizados a operação de inserção da questão anterior executa em tempo constante. Efectue a sua análise agregada considerando a sequência de inserções 20, 70, 60, 30, 40, 50, 10, 80 (partindo de uma lista vazia). Considere que o custo real de cada inserção/remoção efectuada à cabeça da lista é 1, por isso a inserção de 30 na lista [10, 20, 40, 50] tem custo 3. Apresente ainda uma função de potencial apropriada sobre as listas, e calcule a partir dela o custo amortizado constante desta operação ‘insert rem‘.
+
+R.:
+
+Queremos analisar o custo agregado de inserir 20,70,60,30,40,50,10,80.
+
+Temos que inicialmente a stack está vazia. Ou seja, 
+     
+     -> Podemos fazer logo a inserção de 20. Logo, T(N)=1.
+     
+     -> Inserção do 70 (Apagar o 20 e inserir 70) T(N)=2
+     
+     -> Inserção do 60 (Como 70 é maior do 60, é apenas necessário inserir o 60) T(N)=1
+     
+     -> Inserção do 30 T(N)=1
+     
+     -> Inserção do 40 (Apagar o 30 e inserir o 40)  T(N)=2
+     
+     -> Inserção do 50 (Apagar o 40 e inserir o 50) T(N)=2
+     
+     -> Inserção do 10 (Inserir apenas o 10) T(N)=1
+     
+     -> Inserção do 80 (Temos que apagar tudo, ou seja, o 10,50,60,70 e inserir o 80) T(N)=5
+     
+Temos que o custo agragado é dado por: 1/n\* sum(i=0 to n) ci = 1/8 \*(1+2+1+1+2+2+1+5)=1/8 \* 15 = 2.
+
+Logo, todas operações acima têm custo agregado de 2.
+
+Relativamente ao custo amortizado, temos que   
