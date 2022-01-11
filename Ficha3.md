@@ -312,7 +312,8 @@ void addHash (char *s, THash t){
        ant = ptr;
      }
      //Não encontrar um igual
-     ptr = calloc(*ptr->chave,*s);
+     ptr = calloc(sizeof(Nodo));
+     strcpy(ptr->chave,s);
      ptr->ocorr = 1;
      ptr ->prox = NULL;
      if(ant != NULL) ant->prox = ptr;
