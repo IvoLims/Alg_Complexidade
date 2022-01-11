@@ -382,5 +382,3 @@ Temos que inicialmente a stack está vazia. Ou seja,
 Temos que o custo agragado é dado por: 1/n\* sum(i=0 to n) ci = 1/8 \*(1+2+1+1+2+2+1+5)=1/8 \* 15 = 2.
 
 Logo, todas operações acima têm custo agregado de 2.
-
-Relativamente ao custo amortizado, temos que é 2.
