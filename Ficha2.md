@@ -76,16 +76,28 @@ R.: sum_{0 < i < N} sum_{i <= j < N} j-i+1
 
 (b) Uma forma alternativa de resolver este problema consiste em usar um array auxiliar c com N elementos, que será preenchido de acordo com a seguinte propriedade o elemento c[i] contem a maior soma de um segmento do array que termina (e inclui) v[i]. Implemente esta estratégia e compare a complexidade desta solução com a da função apresentada.
 
+```c
+int maxSoma (int v[], int N) {
+  int i, j, r, m, c[N];
+  c[0] = v[0];
+  r = c[0]
+  for (i = 1; i<N; i++)
+    c[i] = (c[i-1] + v[i] > v[i]) ? c[i-1] + v[i] : v[i];
+  for (i = 1; i<N; i++)
+    if (c[i] > r) r = c[i];
+  return r;
+}
+```
 ## 4. Considere a seguinte função que calcula o comprimento do maior segmento crescente de uma array de inteiros.
 ```c
 int crescente (int v[], int N) {            |     int maxcresc (int v[], int N) {
-int i;                                      |     int r = 1, i = 0, m;
-for (i=1; i<N; i++)                         |     while (i<N-1) {
-if (v[i] < v[i-1]) break;                   |     m = crescente (v+i, N-i);
-return i;                                   |     if (m>r) m = r;
-}                                           |     i++;
-                                            |     }
-                                            |     return r;
+  int i;                                    |       int r = 1, i = 0, m;
+  for (i=1; i<N; i++)                       |       while (i<N-1) {
+    if (v[i] < v[i-1]) break;               |         m = crescente (v+i, N-i);
+  return i;                                 |         if (m>r) m = r;
+}                                           |       i++;
+                                            |       }
+                                            |       return r;
                                             |     }
 ```
 Identifique o melhor e pior caso da função maxcresc em termos do número de comparações entre elementos do array argumento. Calcule ainda esse número para o pior caso identificado. Note que as operações \*2, /2 e %2 se podem escrever como >>1, <<1 e &1.
@@ -125,17 +137,17 @@ R.: (sum_{0 <= i < log_2(n)} n/2^i) + 2^(log_2(n)+1) * k'; O(n * log_2(n))
 ## 2. Exprima a complexidade da função maxSomaR (em termos do número de acessos ao array argumento) como uma recorrência.
 ```c
 int maxSomaR (int v[], int N) {
-int r=0, m1, m2, i;
-if (N>0) {
-m1 = m2 = v[0];
-for (i=1; i<N; i++) {
-m2 = m2+v[i];
-if (m2>m1) m1=m2;
-}
-m2 = maxSomaR (v+1,N-1);
-if (m1>m2) r = m1; else r = m2;
-}
-return r;
+  int r=0, m1, m2, i;
+  if (N>0) {
+    m1 = m2 = v[0];
+    for (i=1; i<N; i++) {
+      m2 = m2+v[i];
+      if (m2>m1) m1=m2;
+    }
+    m2 = maxSomaR (v+1,N-1);
+    if (m1>m2) r = m1; else r = m2;
+  }
+  return r;
 }
 ```
 R.: 
@@ -147,11 +159,11 @@ n^2/2 + n/2
 ```c
 void Hanoi(int nDiscos, int esquerda, int direita, int meio)
 {
-if (nDiscos > 0) {
-Hanoi(nDiscos-1, esquerda, meio, direita);
-printf("mover disco de %d para %d\n", esquerda, direita);
-Hanoi(nDiscos-1, meio, direita, esquerda);
-}
+  if (nDiscos > 0) {
+    Hanoi(nDiscos-1, esquerda, meio, direita);
+    printf("mover disco de %d para %d\n", esquerda, direita);
+    Hanoi(nDiscos-1, meio, direita, esquerda);
+  }
 }
 ```
 Escreva uma relação de recorrência que exprima a complexidade deste algoritmo (por exemplo, em função do número de linhasimpressas). Desenhe a árvore de recursão do algoritmo e obtenha a partir dessa árvore um resultado sobre a sua complexidade assimptótica.
@@ -164,11 +176,11 @@ sum_{0 <= i < n} 2^i = 2^n -1
 ## 4. Considere a seguinte definição da função que ordena um vector usando o algoritmo de merge sort.
 ```c
 void msort (int v[], int N) {
-int m = N/2;
-if (N>1) {
-msort (v, m); msort (v+m, N-m);
-mergeH (v, N);
-}
+  int m = N/2;
+  if (N>1) {
+    msort (v, m); msort (v+m, N-m);
+    mergeH (v, N);
+  }
 }
 ```
 Considere que a função int mergeH (int a[], int N) executa em tempo Tmerge(N) = 2∗N. Apresente uma relação de recorrência que traduza o tempo de execução de msort em função do tamanho do vector argumento. Apresente ainda uma solução dessa recorrência.
@@ -187,11 +199,11 @@ O(n * log_2(n))
 vazias).
 ```c
 int altura (ABin a){
-int r=0;
-if (a!=NULL)
-r = 1 + max (altura (a->esq),
-altura (a->dir));
-return r;
+  int r=0;
+  if (a!=NULL)
+    r = 1 + max (altura (a->esq),
+    altura (a->dir));
+  return r;
 }
 ```
 R.:
@@ -206,10 +218,10 @@ T(n) = k' + T(n-1) + T(0)
 ## 1. Relembre a função crescente definida acima.
 ```c
 int crescente (int v[], int N) {
-int i;
-for (i=1; i<N; i++)
-if (v[i] < v[i-1]) break;
-return i;
+  int i;
+  for (i=1; i<N; i++)
+    if (v[i] < v[i-1]) break;
+  return i;
 }
 ```
 Considerando que os valores do array são perfeitamente aleatórios e por isso, para qualquer índice i, a probabilidade de a posição i conter um valor menor do que a posição i-1 é 0.5. Calcule o número médio de comparações efectuadas por esta função. Com base no resultado obtido, calcule o custo médio da função maxcresc apresentada na Secção 1.
@@ -223,19 +235,17 @@ R.: **Nº médio de comparações =** (N-1) * (1/2)^(N-1) + sum_{0 < i < N} i * 
 ## 3. Considere a função intcmp que recebe como argumento dois arrays de N bits (representando dois inteiros) e compara os valores representados. Note que a função cmp é a mesma função, com os inteiros x e y representados da forma habitual.
 ```c
 int intcmp (int x[], int y[], int N){
-for (i=N-1;
-i>=0 && x[i] == y[i];
-i--)
-;
-if (i==0) return 0;
-else return (x[i] - y[i]);
+  for (i=N-1;i>=0 && x[i] == y[i];i--);
+  if (i==0) return 0;
+  else return (x[i] - y[i]);
 }
+
 int cmp (unsigned x, unsigned y) {
-while (x!=0 && y!=0 && x&1 == y&1){
-x=x>1; y=y>1;
-}
-if (x==0 && y==0) return 0;
-else return (x&1 - y&1);
+    while (x!=0 && y!=0 && x&1 == y&1){
+      x=x>1; y=y>1;
+    }
+    if (x==0 && y==0) return 0;
+    else return (x&1 - y&1);
 }
 ```
 Assumindo que a probabilidade de dois bits aleatórios serem iguais é 0.5, determine o custo médio (número de comparações entre elementos dos arrays) desta função.
@@ -245,11 +255,11 @@ R.: N * (1/2)^N + sum_{1 <= i <= N} i * (1/2)^i
 ## 4. Considere a seguinte definição da função inc que recebe um array de N bits (representando um inteiro x) e que modifica o array de forma a representar x+1.
 ```c
 int inc (int x[], int N){
-int i=N-1;
-while (i>=0 && x[i] == 1)
-x[i--] = 0;
-if (i<0) return 1;
-x[i] = 1;
+  int i=N-1;
+  while (i>=0 && x[i] == 1)
+    x[i--] = 0;
+    if (i<0) return 1;
+    x[i] = 1;
 return 0;
 }
 ```
