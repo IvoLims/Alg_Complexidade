@@ -50,7 +50,7 @@ void inverte (GrafoL o, GrafoM d){
   }
 }
 ```
-R.: O(NV^3) mas pode ser otimizado para O(NV^2).
+R.: O(NV + E).
 
 ## 3. O grau de entrada (saída) de um grafo define-se como o número máximo de arestas que têm como destino (origem) um qualquer vértice. Defina a função int inDegree (GrafoL g) que calcula o grau de entrada do grafo.
 ```c
@@ -236,7 +236,55 @@ int BF(GrafoL g, int or, int v[], int p[], int l[])
 Usando estas funções ou adaptações destas funções, defina as seguintes.
 ## 1. A função int maisLonga (GrafoL g, int or, int p[]) que calcula a distância (número de arestas) que separa o vértice v do que lhe está mais distante. A função deverá preencher o array p com os vértices correpondentes a esse caminho.
 
+```c
+int maisLonga (GrafoL g, int or, int p[]) {
+    int i, r, max = or;
+    int vis[NV], pai[NV], dist[NV];
+
+    BF(g, or, vis, pai, dist);
+
+    for (i = 0; i < NV; i++) {
+        if (dist[i] > dist[max]) {
+            max = i;
+        }
+    }
+
+    r = dist[max];
+
+    while (max != -1) {
+        p[dist[max]] = max;
+        max = pai[max];
+    }
+
+    return r;
+}
+
+```
+
 ## 2. A função int componentes (GrafoL g, int c[]) recebe como argumento um grafo não orientado g e calcula as componentes ligadas de g, i.e., preenche o array c de tal forma que, para quaisquer par de vértices x e y, c[x] == c[y] sse existe um caminho a ligar x a y. A função deve retornar o número de componentes do grafo.
+
+```c
+int componentes (GrafoL g, int c[]) {
+    int i, j, next = 0;
+    int vis[NV], pai[NV], dist[NV];
+
+    for (i = 0; i < NV; i++)
+        c[i] = 0;
+
+    for (i = 0; next < NV; i++) {
+        BF(g, next, vis, pai, dist);
+
+        for (j = 0, next = NV; j < NV; j++) {
+            if (vis[j])
+                c[j] = i+1;
+            else if (c[j] == 0 && j < next)
+                next = j;
+        }
+    }
+
+    return i;
+}
+```
 
 ## 3. Num grafo orientado e acíclico, uma ordenação topológica dos seus vértices é uma sequência dos vértices do grafo em que, se existe uma aresta a → b então o vértice a aparece antes de b na sequência. Consequentemente, qualquer vértice aparece na sequência depois de todos os seus alcançáveis. A função int ordTop (GrafoL g, int ord[]) preenche o array ord com uma ordenação topológica do grafo.
 
@@ -261,3 +309,74 @@ char *mapa [10] = {"##########"
                   ,"##########"};
 ```
 a invocação caminho (10, 10, mapa, 1,1,1,8) deverá dar como resultado 31.
+
+```c
+typedef struct coord {
+    int l;
+    int c;
+    int dist;
+} coord;
+
+coord newC(int l, int c) {
+    coord n = {l, c, 0};
+    return n;
+}
+
+int equals(coord a, coord b) {
+    return a.l == b.l && a.c == b.c;
+}
+
+int valid(coord a, int L, int C, char mapa[L][C]) {
+    return (a.l >= 0 && a.l < L) && (a.c >= 0 && a.c < C) && mapa[a.l][a.c] == ' ';
+}
+
+/*
+* O array de visitados é necessário se não estivermos a escrever no array (ASCII print)
+*/
+int caminho (int L, int C, char mapa[L][C], int ls, int cs, int lf, int cf) {
+    int front, end, vis[L][C], i, j;
+    coord queue[2*L*C], curr, dest;
+
+    front = end = 0;
+    dest = newC(lf, cf);
+    queue[end++] = newC(ls, cs); //enqueue
+
+    for (i = 0; i < L; i++)
+        for (j = 0; j < C; j++)
+            vis[i][j] = 0;
+
+    while (front != end) {
+        curr = queue[front++]; //dequeue
+
+        if (equals(curr, dest)) {
+            mapa[curr.l][curr.c] = '$';
+            return curr.dist;
+        }
+
+        if (vis[curr.l][curr.c] == 1) {
+            continue;
+        } else {
+            vis[curr.l][curr.c] = 1;
+        }
+        
+        // ASCII print
+        mapa[curr.l][curr.c] = curr.dist+'0';
+
+        coord next_moves[4] = {
+            {curr.l-1, curr.c, curr.dist+1},
+            {curr.l+1, curr.c, curr.dist+1},
+            {curr.l, curr.c-1, curr.dist+1},
+            {curr.l, curr.c+1, curr.dist+1},
+        };
+
+        for (i = 0; i < 4; i++) {
+            if (valid(next_moves[i], L, C, mapa)) {
+                printf("*%d %d;  ", next_moves[i].l, next_moves[i].c);
+                queue[end++] = next_moves[i];
+            }
+        }
+    }
+
+    return -1;
+}
+```
