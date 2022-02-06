@@ -142,7 +142,7 @@ T(1) - k
 |
 T(0) - K'
 ```
-sum_{0 <= i < log_2(n)} 2^i * k + k'; O(log_2(n))
+sum_{0 <= i < log_2(n)} k + k'; O(log_2(n))
 
 (c) T(n) = k + 2 ∗ T(n/2) com k constante
 
@@ -159,7 +159,7 @@ Temos que uma árvore com este tempo de execução, será do tipo:
       / 
      T(0) - K'
 ```
-(sum_{0 <= i < log_2(n)} 2^i * k + 2^(log_2(n)) * k'; O(n)  
+(sum_{0 <= i < log_2(n)} 2^i) * k + 2^(log_2(n)) * k'; O(n)  
 
 (d) T(n) = n + T(n − 1)
 
