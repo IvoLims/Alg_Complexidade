@@ -246,7 +246,19 @@ void Hanoi(int nDiscos, int esquerda, int direita, int meio)
 ```
 Escreva uma relação de recorrência que exprima a complexidade deste algoritmo (por exemplo, em função do número de linhasimpressas). Desenhe a árvore de recursão do algoritmo e obtenha a partir dessa árvore um resultado sobre a sua complexidade assimptótica.
 
-R.:
+R.:  Assim sendo, a árvore de recursão do algoritmo é:
+```
+        T(N) - 1
+         /    \
+     1-T(N-1)  T(N-1) - 1
+        /\       /\
+        ...     ...
+       / 
+      T(1) - 1
+      / 
+     T(0) - 0
+```
+
 T(0) = 0  
 T(n) = k + 2 * T(n-1)  
 sum_{0 <= i < n} 2^i = 2^n -1 
