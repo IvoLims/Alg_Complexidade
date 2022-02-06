@@ -277,7 +277,6 @@ int procura (int x, int a[], int N){
 // pre: N>0
 int p = -1, i = 0;
 // inv: ??
-5
 while (p == -1 && i < N) {
 if (a[i] == x) p = i;
 i = i+1;
