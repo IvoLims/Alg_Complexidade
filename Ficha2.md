@@ -112,27 +112,103 @@ R.:
 
 (a) T(n) = k + T(n − 1) com k constante
 
-R.: sum_{0 <= i < n} k + k'
+R.: 
+Temos que uma árvore com este tempo de execução, será do tipo:
+
+T(N) - k
+|
+T(N-1) - k
+| 
+...
+|
+T(1) - k
+|
+T(0) - K'
+
+sum_{0 <= i < n} k + k'; O(n)
 
 (b) T(n) = k + T(n/2) com k constante
 
-R.: sum_{0 <= i < log_2(n)} 2^i * k + k'
+R.:
+Temos que uma árvore com este tempo de execução, será do tipo:
+T(N) - k
+|
+T(N/2) - k
+| 
+...
+|
+T(1) - k
+|
+T(0) - K'
+
+sum_{0 <= i < log_2(n)} 2^i * k + k'; O(log_2(n))
 
 (c) T(n) = k + 2 ∗ T(n/2) com k constante
 
-R.: (sum_{0 <= i < log_2(n)} 2^i) * k + 2^(log_2(n)) * k'  
+R.: 
+Temos que uma árvore com este tempo de execução, será do tipo:
+           T(N) - k
+         /    \
+     k-T(N/2)  T(N/2) - k
+        /\       /\
+        ...     ...
+       / 
+      T(1) - k
+      / 
+     T(0) - K'
+
+(sum_{0 <= i < log_2(n)} 2^i * k + 2^(log_2(n)) * k'; O(n)  
 
 (d) T(n) = n + T(n − 1)
 
-R.: sum_{0 <= i < n} n + k' = n^2/2 + n/2 + k'; O(n)  
+R.:
+Temos que uma árvore com este tempo de execução, será do tipo:
+
+T(N) - N
+|
+T(N-1) - N-1
+| 
+...
+|
+T(1) - 1
+|
+T(0) - K'
+
+sum_{0 <= i < n} n + k' = (n^2)/2 + n/2 + k'; O(n^2)  
 
 (e) T(n) = n + T(n/2)
 
-R.: (sum_{0 <= i < log_2(n)} n/2^i) + k' = 2n - 1; O(n)  
+R.:
+Temos que uma árvore com este tempo de execução, será do tipo:
+
+T(N) - N
+|
+T(N/2) - N/2
+| 
+...
+|
+T(1) - 1
+|
+T(0) - K'
+
+(sum_{0 <= i < log_2(n)} n/2^i) + k' = 2n - 1; O(n)  
 
 (f) T(n) = n + 2 ∗ T(n/2)
 
-R.: (sum_{0 <= i < log_2(n)} n/2^i) + 2^(log_2(n)+1) * k'; O(n * log_2(n))  
+R.: 
+Temos que uma árvore com este tempo de execução, será do tipo:
+
+           T(N) - N
+         /    \
+     N/2-T(N/2)  T(N/2) - N/2
+        /\       /\
+        ...     ...
+       / 
+      T(1) - 1
+      / 
+     T(0) - K'
+     
+(sum_{0 <= i < log_2(n)} n/2^i) + 2^(log_2(n)+1) * k'; O(n * log_2(n))  
 
 ## 2. Exprima a complexidade da função maxSomaR (em termos do número de acessos ao array argumento) como uma recorrência.
 ```c
