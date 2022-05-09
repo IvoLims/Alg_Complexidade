@@ -121,22 +121,19 @@ pós: `forall_{1 <= i < N} v[i-1] < v[i]`
 
 R.: `x = 3, y = -1`
 
-(b) `{True} x = x+y; y = x-y; x = x-y; {x == y}
+(b) `{True} x = x+y; y = x-y; x = x-y; {x == y}`
 
 R.: `x = 3, y = 2` 
 
-(c)
-`{True} x = x+y; y = x-y; x = x-y; {x 6= y}
+(c) `{True} x = x+y; y = x-y; x = x-y; {x 6= y}`
 
 R.: `x = 3, y = 3`
 
-(d)
-`{True} if (x>y) r = x-y; else r = y-x; {r > 0}
+(d) `{True} if (x>y) r = x-y; else r = y-x; {r > 0}`
 
 R.: `x = 3, y = 3`
 
-(e)
-`{True} while (x>0) { y=y+1; x = x-1;} {y > x}
+(e) `{True} while (x>0) { y=y+1; x = x-1;} {y > x}`
 
 R.: `x = 0, y = -1` 
 
