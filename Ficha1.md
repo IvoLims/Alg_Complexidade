@@ -117,22 +117,27 @@ pós: `forall_{1 <= i < N} v[i-1] < v[i]`
 
 # 2 Correção
 ## 1. Para cada um dos seguintes triplos de Hoare, apresente um contra-exemplo que mostre a sua não validade.
-(a) `{T rue} r = x+y; {r ≥ x}`
+(a) `{True} r = x+y; {r ≥ x}`
+
 R.: `x = 3, y = -1`
 
 (b) `{True} x = x+y; y = x-y; x = x-y; {x == y}
+
 R.: `x = 3, y = 2` 
 
 (c)
 `{True} x = x+y; y = x-y; x = x-y; {x 6= y}
+
 R.: `x = 3, y = 3`
 
 (d)
 `{True} if (x>y) r = x-y; else r = y-x; {r > 0}
+
 R.: `x = 3, y = 3`
 
 (e)
 `{True} while (x>0) { y=y+1; x = x-1;} {y > x}
+
 R.: `x = 0, y = -1` 
 
 ## 2. Modifique a pré-condição de cada um dos triplos de Hoare da alínea anterior de forma a obter um triplo válido.
